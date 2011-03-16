@@ -4,8 +4,8 @@ class PaypalController < ApplicationController
     notify = PayPalNotification.new(params)
     logger.debug(notify.inspect)
     if notify.acknowledge
-        a = Transaction.first
-        a.update_attributes(:status => "Paid")
+        # a = Transaction.first
+        # a.update_attributes(:status => "Paid")
     end
     render :nothing => true
   end
