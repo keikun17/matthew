@@ -29,7 +29,7 @@ class PayPalNotification
   def acknowledge
     unless ::Rails.env == "test"
       payload = @ipn
-      response = ssl_post(Paypal.service_url + '?cmd=_notify-validate', payload, 'Content-Length' => "#{payload.size}")
+      response = ssl_post(PAYPAL_URL + '?cmd=_notify-validate', payload, 'Content-Length' => "#{payload.size}")
       raise StandardError.new("Faulty paypal result: #{response}") unless ["VERIFIED", "INVALID"].include?(response)
     else
       response = "VERIFIED"
