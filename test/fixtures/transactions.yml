@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  status: MyString
+  user_id: 1
+  user_type: MyString
+  transaction_reference: MyString
+
+two:
+  status: MyString
+  user_id: 1
+  user_type: MyString
+  transaction_reference: MyString

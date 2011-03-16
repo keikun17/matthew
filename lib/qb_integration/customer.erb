@@ -1,0 +1,18 @@
+<?xml version="1.0" ?> 
+<?qbxml version="6.0"?> 
+<QBXML> 
+	<SignonMsgsRq>
+		<SignonTicketRq> 
+			<ClientDateTime><%=today%></ClientDateTime> 
+			<SessionTicket><%=session%></SessionTicket>
+			<Language>English</Language> 
+			<AppID><%=APPLICATION_ID%></AppID>
+			<AppVer>1</AppVer> 
+		</SignonTicketRq> 
+	</SignonMsgsRq> 
+	<QBXMLMsgsRq onError="continueOnError">
+  		<CustomerQueryRq requestID="<%=request_id%>">
+  			<FullName><%=full_name%></FullName>
+  		</CustomerQueryRq>
+  	</QBXMLMsgsRq>
+</QBXML>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?qbxml version="2.0"?>
+<QBXML>
+  <SignonMsgsRq>
+		<SignonTicketRq> 
+			<ClientDateTime><%=today%></ClientDateTime> 
+			<SessionTicket><%=session%></SessionTicket>
+			<Language>English</Language> 
+			<AppID><%=%></AppID>
+			<AppVer>1</AppVer> 
+		</SignonTicketRq> 
+	</SignonMsgsRq>
+	<QBXMLMsgsRq onError="stopOnError">
+		<InvoiceAddRq requestID="2">
+			<InvoiceAdd>
+				<CustomerRef>
+					<ListID>1</ListID>
+				</CustomerRef>
+				<TxnDate><%=today%></TxnDate>
+				<RefNumber></RefNumber>
+				<PONumber></PONumber>
+				<Memo>Test</Memo>
+
+        <% items.each do |item| %>
+				<InvoiceLineAdd>
+					<ItemRef>
+						<FullName><%=item%></FullName>
+					</ItemRef>
+					<Quantity>1</Quantity>
+				</InvoiceLineAdd>
+			 <%end%>
+			</InvoiceAdd>
+		</InvoiceAddRq>
+	</QBXMLMsgsRq>
+</QBXML>
