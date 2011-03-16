@@ -1,5 +1,7 @@
 class PaypalController < ApplicationController
   
+  skip_before_filter :verify_authenticity_token
+  
   def ipn
     notify = PayPalNotification.new(params)
     logger.debug(notify.inspect)
