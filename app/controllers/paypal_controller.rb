@@ -1,6 +1,6 @@
 class PaypalController < ApplicationController
   
-  # skip_before_filter :verify_authenticity_token
+  skip_before_filter :verify_authenticity_token
   include ActiveMerchant::Billing::Integrations
   
   def ipn
