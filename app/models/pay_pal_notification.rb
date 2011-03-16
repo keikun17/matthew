@@ -97,9 +97,7 @@ class PayPalNotification
   
   def raw
     @raw
-  end
-  
-  
+  end  
   
 end
 

@@ -44,6 +44,10 @@ module ActiveMerchant #:nodoc:
         class Notification < ActiveMerchant::Billing::Integrations::Notification
           include PostsData
           
+          def initialize(params)
+            @ipn = params
+          end
+          
           # Was the transaction complete?
           def complete?
             status == "Completed"
@@ -136,15 +140,13 @@ module ActiveMerchant #:nodoc:
           #       ... log possible hacking attempt ...
           #     end
           def acknowledge
-            payload =  raw
-
-            response = ssl_post(Paypal.service_url + '?cmd=_notify-validate', payload, 
-              'Content-Length' => "#{payload.size}",
-              'User-Agent'     => "Active Merchant -- http://activemerchant.org"
-            )
-            
-            raise StandardError.new("Faulty paypal result: #{response}") unless ["VERIFIED", "INVALID"].include?(response)
-
+            payload =  @ipn
+            unless Rails.env == 'test'
+              response = ssl_post(Paypal.service_url + '?cmd=_notify-validate', payload, 'Content-Length' => "#{payload.size}")
+              raise StandardError.new("Faulty paypal result: #{response}") unless ["VERIFIED", "INVALID"].include?(response)
+            else
+              response = "VERIFIED"
+            end
             response == "VERIFIED"
           end
         end
