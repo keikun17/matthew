@@ -31,8 +31,12 @@ gem 'ruby-debug19'
 # group :development, :test do
 #   gem 'webrat'
 # end
-
+gem 'devise'
 gem 'rack-test'
+gem 'haml'
+gem "compass", ">= 0.11.1"
+gem 'formtastic'
+gem 'will_paginate'
 
 group :test do
   gem 'cucumber-rails'
