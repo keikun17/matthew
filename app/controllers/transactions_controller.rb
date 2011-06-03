@@ -2,8 +2,13 @@ class TransactionsController < ApplicationController
   # GET /transactions
   # GET /transactions.xml
   def index
-    @transactions = Transaction.all
-
+    if params[:devex_user_id]
+      @devex_user = DevexUser.find params[:devex_user_id]
+      @transactions = @devex_user.transactions
+    else
+      @transactions = Transaction.all
+    end
+    @total_amount = @transactions.sum(:amount)
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @transactions }

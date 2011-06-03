@@ -13,7 +13,7 @@ Matthew::Application.initialize!
 #   PAYPAL_URL = 'https://paypal.com/cgi-bin/webscr'
 # end
 
-unless RAILS_ENV == 'production'
+unless ::Rails.env == 'production'
   PAYPAL_ACCOUNT = 'seller@example.com'
   ActiveMerchant::Billing::Base.mode = :test 
 else

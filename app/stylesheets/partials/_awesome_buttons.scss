@@ -1,0 +1,47 @@
+/* Awesome buttons from http://www.zurb.com/article/266/super-awesome-buttons-with-css3-and-rgba */
+.awesome{
+	background: #222 url(images/alert-overlay.png) repeat-x !important;
+	display: inline-block;
+	padding: 5px 10px 6px;
+	color: #fff !important; 
+	text-decoration: none !important;
+	font-weight: bold !important;
+	line-height: 1 !important;;
+	-moz-border-radius: 5px !important;
+	-webkit-border-radius: 5px !important;
+	-moz-box-shadow: 0 1px 3px rgba(0,0,0,0.5) !important;
+	-webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5) !important;
+	text-shadow: 0 -1px 1px rgba(0,0,0,0.25) !important;
+	border-bottom: 1px solid rgba(0,0,0,0.25) !important;	
+	position: relative;
+	cursor: pointer;
+}
+
+/* Sizes ---------- */
+.small.awesome {
+font-size: 11px !important;
+}
+.medium.awesome {
+font-size: 13px !important;
+}
+.large.awesome {
+font-size: 14px !important;
+padding: 8px 14px 9px !important;
+}
+ 
+/* Colors ---------- */
+.blue.awesome {
+background-color: #2daebf !important;
+}
+.red.awesome {
+background-color: #e33100 !important;
+}
+.magenta.awesome {
+background-color: #a9014b !important;
+}
+.orange.awesome {
+background-color: #ff5c00 !important;
+}
+.yellow.awesome {
+background-color: #ffb515 !important;
+}

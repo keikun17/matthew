@@ -1,0 +1,36 @@
+#page-title
+  %h3 Listing transactions
+
+Total: Amount
+= @total_amount
+USD
+
+%table.table2
+  %thead
+    %tr
+      %th{:scope => "col"} Transaction Type
+      %th{:scope => "col"} Transaction Reference    
+      %th{:scope => "col"} Paypal User
+      %th{:scope => "col"} Devex User
+      %th{:scope => "col"} Amount
+      %th{:scope => "col", :colspan => 3} Options
+
+  - @transactions.each do |transaction|
+    %tr
+      %td= transaction.transaction_type 
+      %td= link_to transaction.transaction_reference, transaction_path(transaction)
+      %td
+        = transaction.paypal_account.full_name
+        (
+        = transaction.paypal_account.email
+        )
+      %td
+        - if transaction.paypal_account and transaction.paypal_account.devex_user 
+          =link_to transaction.paypal_account.devex_user.full_name, devex_user_path(transaction.paypal_account.devex_user)
+      %td
+        - if transaction.amount
+          = transaction.amount
+          USD
+      %td= link_to 'Show', transaction 
+      %td= link_to 'Edit', edit_transaction_path(transaction) 
+      %td= link_to 'Destroy', transaction, :confirm => 'Are you sure?', :method => :delete

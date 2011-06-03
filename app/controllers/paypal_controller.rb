@@ -7,10 +7,10 @@ class PaypalController < ApplicationController
     # require 'ruby-debug'
     # debugger
     notify = Paypal::Notification.new(request.raw_post)
-    
+
     if notify.acknowledge
-      transaction = Transaction.first
-      transaction.update_attributes(:status => "Paid") if transaction
+      # transaction = Transaction.first
+      # transaction.update_attributes(:status => "Paid") if transaction
     else
       #DO SOMETHING
     end

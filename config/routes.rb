@@ -1,6 +1,27 @@
 Matthew::Application.routes.draw do
+  resources :products
+
+  resources :devex_users do
+    resources :transactions
+    resources :paypal_accounts
+  end
+
+  resources :paypal_accounts do 
+    collection do 
+      get 'orphans'
+    end
+    member do 
+      get 'map'
+    end
+  end
+  
+  devise_for :admins
+
   resources :transactions
   match '/ipn' => 'paypal#ipn'
+  match '/mapping' => 'mapping#index'
+  match '/reports' => 'reports#index'
+  match '/mapping/do_map' => 'mapping#do_map'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -50,7 +71,7 @@ Matthew::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  # root :to => "welcome#index"
+  root :to => "reports#index"
 
   # See how all your routes lay out with "rake routes"
 

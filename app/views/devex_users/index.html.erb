@@ -1,0 +1,21 @@
+<h1>Listing devex_users</h1>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @devex_users.each do |devex_user| %>
+  <tr>
+    <td><%= link_to 'Show', devex_user %></td>
+    <td><%= link_to 'Edit', edit_devex_user_path(devex_user) %></td>
+    <td><%= link_to 'Destroy', devex_user, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Devex user', new_devex_user_path %>

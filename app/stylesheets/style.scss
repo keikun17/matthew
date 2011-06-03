@@ -1,0 +1,161 @@
+@import "themes/matthew";
+@import "partials/awesome_buttons";
+@import "partials/fancy_tables";
+@import "compass/css3";
+$blueprint_grid_columns: 24;
+$blueprint_grid_width: 40px;
+
+@import "blueprint";
+@import "blueprint/colors";
+
+
+.two-columns {
+  @include container;
+	background-color: $main-background-color;
+	height:100%;
+	overflow:scroll;
+/*  background-color: #cccccc;*/
+  #header{
+		@include column(24);
+		background-color: $header-bg-color;
+		height: 50px;
+		text-align:left;
+		#pagetitle{
+			font-size: 30px;
+			font-family:'Geo', 'Helvetica', 'sans-serif';
+			color:$page-title-color;
+			padding-left:10px;}
+		#toplinks {
+			float:right;
+			margin-right:20px;
+			font-size:12px;
+			a {
+				color:white;}}}
+
+	#topnav{
+		@include column(24);
+		background-color: $topnav-bg-color;
+		height: 30px;
+		margin-bottom:5px;
+		padding-top:10px;
+		ul{
+			list-style-type: none;
+			text-align:left;
+			li{
+				float:left;
+				border-right: solid 1px black;
+				padding-right:5px;
+				padding-left:5px;
+				font-size:15px;
+					a{
+						color:black;
+						text-decoration:none;
+						&:hover{
+							color:blue;
+							text-decoration:none;
+							background-color:transparent;}}
+				&.last{
+					border:none;}}}}
+
+ 	#footer {
+    @include column(24); 
+		background-color: $footer-bg-color;
+		color:$footer-font-color;}
+
+  #sidebar {
+    @include column(4); 
+		background-color: $sidebar-bg-color;
+		ul{
+			margin-right:10px;
+			list-style-type:none;
+			text-align: right;
+			a {
+				font-size:13px;
+				text-decoration:none;
+			}}}
+  #content {
+    @include column(20, true);
+		background-color: $content-bg-color;}
+	#content-inner{
+		border:1px solid black;
+		text-align:left;
+		min-height: 550px;
+		padding:10px;
+			table{
+				margin-top:10px;
+				margin-bottom:5px;}}
+		#content-buttons{
+			float: left;}
+		#content-search{
+			float: right;
+			input{
+				width:auto;}}}
+
+#notifications-outer {
+	width:80%;
+	#notifications-inner {
+		width:50%;
+		margin:auto;}}
+
+@mixin cool-link($cool-link-color: red, $color: white){
+	background-color:$cool-link-color;
+	color:$color !important;
+	text-decoration:none;
+	padding-left:3px;
+	padding-right:3px;
+	border:1px solid $cool-link-color;
+	@include border-radius(5px);
+	border-color:black;
+	&:visited{
+		text-decoration:none;}
+	&:hover{
+		background-color:white;
+		color:$cool-link-color !important;}}
+
+/* Paypal Account Related*/
+a.cool-link-blue{
+	@include cool-link(blue)
+}
+
+/* Transaction Related */
+a.cool-link-green{
+	@include cool-link(green)
+}
+
+/* Devex User Related */
+a.cool-link-orange{
+	@include cool-link(orange, black)
+}
+/* QB Related */
+a.cool-link-magenta{
+	@include cool-link(magenta)
+}
+
+/* Error Related */
+a.cool-link-red{
+	@include cool-link(red)
+}
+
+.paypalaccount-email{
+	font-weight:bold;
+	color:green;
+}
+
+
+/*
+body.two-col {
+  #container {
+    @include container; }
+  #header, #footer {
+    @include column($blueprint-grid-columns); }
+  #sidebar {
+    // One third of the grid columns, rounding down. With 24 cols, this is 8.
+    $sidebar-columns: floor($blueprint-grid-columns / 3);
+    @include column($sidebar-columns); }
+  #content {
+    // Two thirds of the grid columns, rounding up.
+    // With 24 cols, this is 16.
+    $content-columns: ceil(2 * $blueprint-grid-columns / 3);
+    // true means it's the last column in the row
+    @include column($content-columns, true); } }
+*/

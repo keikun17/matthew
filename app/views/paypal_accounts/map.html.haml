@@ -1,0 +1,73 @@
+#page-title
+  %h3 Link Paypal Accounts to Devex and Quickbooks
+  %h4
+  
+    = "Name : " + [@paypal_account.first_name, @paypal_account.last_name].join(" ")
+    %br
+    = "Paypal Email : " + @paypal_account.email
+    %br
+    = "Paypal ID : " + @paypal_account.payer_id.to_s
+  
+#content-options
+  #content-buttons
+
+  #content-search
+    =text_field_tag "Search", "Search...", :size => 30
+    =radio_button_tag "Consultant", ""
+    Consultant
+    =radio_button_tag "Company", ""
+    Company
+
+%hr
+%h2.awesome DEVEX
+%table.table2
+  %thead
+    %tr
+      %th{:scope => "col"} 
+      %th{:scope => "col"} Service Level
+      %th{:scope => "col"} -------------
+      %th{:scope => "col"} -------------
+      %th{:scope => "col"} -------------             
+      %th{:scope => "col"} Options
+  %tbody
+    -@consultants.each do |consultant|
+      %tr
+        %th{:scope => "row"}= [consultant.first_name, consultant.last_name].join(" ")
+        %td= consultant.service_level_id
+        %td
+        %td
+        %td
+        %td= link_to "Connect", mapping_do_map_path(:consultant_id => consultant.id, :paypal_account_id => params[:id]), :class => "awesome blue"
+%hr
+%h2.awesome Quickbooks
+
+#content-options
+  #content-buttons
+
+  #content-search
+    =text_field_tag "Search", "Search...", :size => 30
+    =radio_button_tag "Consultant", ""
+    Consultant
+    =radio_button_tag "Company", ""
+    Company
+
+%table.table2
+  %thead
+    %tr
+      %th{:scope => "col"} 
+      %th{:scope => "col"} temp
+      %th{:scope => "col"} temp
+      %th{:scope => "col"} temp            
+      %th{:scope => "col"} temp
+      %th{:scope => "col"} temp
+      
+      %th{:scope => "col"} Options
+  %tbody
+    %tr
+      %th{:scope => "row"} Quickbooks Member Name Here
+      %td temp
+      %td temp
+      %td temp
+      %td temp
+      %td temp
+      %td= link_to "Connect", "#", :class => "awesome magenta"

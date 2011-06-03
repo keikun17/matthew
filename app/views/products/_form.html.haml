@@ -1,0 +1,16 @@
+- if @product.errors.any?
+  #error_explanation
+    = pluralize(@product.errors.count, "error")
+    prohibited this product from being saved:
+    
+    %ul
+      - @product.errors.full_messages.each do |msg|
+        %li= msg
+= semantic_form_for @product do |form|
+  = form.inputs do 
+    = form.input :name
+    = form.input :paypal_product_code
+    = form.input :devex_product_id
+    = form.input :service_level
+  = form.buttons
+  

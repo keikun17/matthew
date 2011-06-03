@@ -1,0 +1,484 @@
+/*$header-bg-color: darken($font-color, 50%);*/
+/* Awesome buttons from http://www.zurb.com/article/266/super-awesome-buttons-with-css3-and-rgba */
+/* line 2, ../../app/stylesheets/partials/_awesome_buttons.scss */
+.awesome {
+  background: #222222 url(images/alert-overlay.png) repeat-x !important;
+  display: inline-block;
+  padding: 5px 10px 6px;
+  color: #fff !important;
+  text-decoration: none !important;
+  font-weight: bold !important;
+  line-height: 1 !important;
+  -moz-border-radius: 5px !important;
+  -webkit-border-radius: 5px !important;
+  -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5) !important;
+  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5) !important;
+  text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.25) !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.25) !important;
+  position: relative;
+  cursor: pointer;
+}
+
+/* Sizes ---------- */
+/* line 21, ../../app/stylesheets/partials/_awesome_buttons.scss */
+.small.awesome {
+  font-size: 11px !important;
+}
+
+/* line 24, ../../app/stylesheets/partials/_awesome_buttons.scss */
+.medium.awesome {
+  font-size: 13px !important;
+}
+
+/* line 27, ../../app/stylesheets/partials/_awesome_buttons.scss */
+.large.awesome {
+  font-size: 14px !important;
+  padding: 8px 14px 9px !important;
+}
+
+/* Colors ---------- */
+/* line 33, ../../app/stylesheets/partials/_awesome_buttons.scss */
+.blue.awesome {
+  background-color: #2daebf !important;
+}
+
+/* line 36, ../../app/stylesheets/partials/_awesome_buttons.scss */
+.red.awesome {
+  background-color: #e33100 !important;
+}
+
+/* line 39, ../../app/stylesheets/partials/_awesome_buttons.scss */
+.magenta.awesome {
+  background-color: #a9014b !important;
+}
+
+/* line 42, ../../app/stylesheets/partials/_awesome_buttons.scss */
+.orange.awesome {
+  background-color: #ff5c00 !important;
+}
+
+/* line 45, ../../app/stylesheets/partials/_awesome_buttons.scss */
+.yellow.awesome {
+  background-color: #ffb515 !important;
+}
+
+/*From http://tympanus.net/codrops/2010/05/03/pimp-your-tables-with-css3/*/
+/* line 3, ../../app/stylesheets/partials/_fancy_tables.scss */
+table.table2 {
+  font-family: Georgia, serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: normal;
+  letter-spacing: -1px;
+  line-height: 1.2em;
+  border-collapse: collapse;
+  text-align: center;
+}
+
+/* line 14, ../../app/stylesheets/partials/_fancy_tables.scss */
+.table2 thead th, .table2 tfoot td {
+  padding: 10px 10px 10px 10px;
+  color: #fff;
+  font-size: 15px;
+  background-color: #222;
+  font-weight: normal;
+  border-right: 1px dotted #666;
+  border-top: 3px solid #666;
+  -moz-box-shadow: 0px -1px 4px black;
+  -webkit-box-shadow: 0px -1px 4px black;
+  box-shadow: 0px -1px 4px black;
+  text-shadow: 0px 0px 1px #fff;
+  text-shadow: 1px 1px 1px #000;
+}
+
+/* line 29, ../../app/stylesheets/partials/_fancy_tables.scss */
+.table2 tfoot th {
+  padding: 10px;
+  font-size: 18px;
+  text-transform: uppercase;
+  color: #888;
+}
+
+/* line 36, ../../app/stylesheets/partials/_fancy_tables.scss */
+.table2 tbody {
+  font-size: 13px;
+}
+
+/* line 40, ../../app/stylesheets/partials/_fancy_tables.scss */
+.table2 tfoot td {
+  font-size: 36px;
+  color: #EF870E;
+  border-top: none;
+  border-bottom: 3px solid #666;
+  -moz-box-shadow: 0px 1px 4px #000;
+  -webkit-box-shadow: 0px 1px 4px #000;
+  box-shadow: 0px 1px 4px #000;
+}
+
+/* line 50, ../../app/stylesheets/partials/_fancy_tables.scss */
+.table2 thead th:empty {
+  background: transparent;
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+/* line 57, ../../app/stylesheets/partials/_fancy_tables.scss */
+.table2 thead :nth-last-child(1) {
+  border-right: none;
+}
+
+/* line 62, ../../app/stylesheets/partials/_fancy_tables.scss */
+.table2 thead :first-child,
+.table2 tbody :nth-last-child(1) {
+  border: none;
+}
+
+/* line 66, ../../app/stylesheets/partials/_fancy_tables.scss */
+.table2 tbody th {
+  text-align: right;
+  padding: 10px;
+  color: #333;
+  text-shadow: 1px 1px 1px #ccc;
+  background-color: #f9f9f9;
+}
+
+/* line 74, ../../app/stylesheets/partials/_fancy_tables.scss */
+.table2 tbody td {
+  padding: 10px;
+  background-color: #f0f0f0;
+  border-right: 1px dotted #999;
+  text-shadow: -1px 1px 1px white;
+  text-transform: uppercase;
+  color: #333;
+}
+
+/*.table2 tbody span.check::before{
+    content : url(../images/check1.png)
+}*/
+/* line 12, ../../app/stylesheets/style.scss */
+.two-columns {
+  width: 1190px;
+  margin: 0 auto;
+  overflow: hidden;
+  *zoom: 1;
+  background-color: white;
+  height: 100%;
+  overflow: scroll;
+  /*  background-color: #cccccc;*/
+}
+/* line 18, ../../app/stylesheets/style.scss */
+.two-columns #header {
+  display: inline;
+  float: left;
+  margin-right: 10px;
+  width: 1190px;
+  background-color: #337abd;
+  height: 50px;
+  text-align: left;
+}
+/* line 147, ../../.gems/ruby/1.9.1/gems/compass-0.11.1/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
+* html .two-columns #header {
+  overflow-x: hidden;
+}
+/* line 23, ../../app/stylesheets/style.scss */
+.two-columns #header #pagetitle {
+  font-size: 30px;
+  font-family: 'Geo', 'Helvetica', 'sans-serif';
+  color: white;
+  padding-left: 10px;
+}
+/* line 28, ../../app/stylesheets/style.scss */
+.two-columns #header #toplinks {
+  float: right;
+  margin-right: 20px;
+  font-size: 12px;
+}
+/* line 32, ../../app/stylesheets/style.scss */
+.two-columns #header #toplinks a {
+  color: white;
+}
+/* line 35, ../../app/stylesheets/style.scss */
+.two-columns #topnav {
+  display: inline;
+  float: left;
+  margin-right: 10px;
+  width: 1190px;
+  background-color: lightblue;
+  height: 30px;
+  margin-bottom: 5px;
+  padding-top: 10px;
+}
+/* line 147, ../../.gems/ruby/1.9.1/gems/compass-0.11.1/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
+* html .two-columns #topnav {
+  overflow-x: hidden;
+}
+/* line 41, ../../app/stylesheets/style.scss */
+.two-columns #topnav ul {
+  list-style-type: none;
+  text-align: left;
+}
+/* line 44, ../../app/stylesheets/style.scss */
+.two-columns #topnav ul li {
+  float: left;
+  border-right: solid 1px black;
+  padding-right: 5px;
+  padding-left: 5px;
+  font-size: 15px;
+}
+/* line 50, ../../app/stylesheets/style.scss */
+.two-columns #topnav ul li a {
+  color: black;
+  text-decoration: none;
+}
+/* line 53, ../../app/stylesheets/style.scss */
+.two-columns #topnav ul li a:hover {
+  color: blue;
+  text-decoration: none;
+  background-color: transparent;
+}
+/* line 57, ../../app/stylesheets/style.scss */
+.two-columns #topnav ul li.last {
+  border: none;
+}
+/* line 60, ../../app/stylesheets/style.scss */
+.two-columns #footer {
+  display: inline;
+  float: left;
+  margin-right: 10px;
+  width: 1190px;
+  background-color: #337abd;
+  color: white;
+}
+/* line 147, ../../.gems/ruby/1.9.1/gems/compass-0.11.1/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
+* html .two-columns #footer {
+  overflow-x: hidden;
+}
+/* line 65, ../../app/stylesheets/style.scss */
+.two-columns #sidebar {
+  display: inline;
+  float: left;
+  margin-right: 10px;
+  width: 190px;
+  background-color: lightyellow;
+}
+/* line 147, ../../.gems/ruby/1.9.1/gems/compass-0.11.1/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
+* html .two-columns #sidebar {
+  overflow-x: hidden;
+}
+/* line 68, ../../app/stylesheets/style.scss */
+.two-columns #sidebar ul {
+  margin-right: 10px;
+  list-style-type: none;
+  text-align: right;
+}
+/* line 72, ../../app/stylesheets/style.scss */
+.two-columns #sidebar ul a {
+  font-size: 13px;
+  text-decoration: none;
+}
+/* line 76, ../../app/stylesheets/style.scss */
+.two-columns #content {
+  display: inline;
+  float: left;
+  margin-right: 0;
+  width: 990px;
+  background-color: transparent;
+}
+/* line 147, ../../.gems/ruby/1.9.1/gems/compass-0.11.1/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
+* html .two-columns #content {
+  overflow-x: hidden;
+}
+/* line 79, ../../app/stylesheets/style.scss */
+.two-columns #content-inner {
+  border: 1px solid black;
+  text-align: left;
+  min-height: 550px;
+  padding: 10px;
+}
+/* line 84, ../../app/stylesheets/style.scss */
+.two-columns #content-inner table {
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+/* line 87, ../../app/stylesheets/style.scss */
+.two-columns #content-buttons {
+  float: left;
+}
+/* line 89, ../../app/stylesheets/style.scss */
+.two-columns #content-search {
+  float: right;
+}
+/* line 91, ../../app/stylesheets/style.scss */
+.two-columns #content-search input {
+  width: auto;
+}
+
+/* line 94, ../../app/stylesheets/style.scss */
+#notifications-outer {
+  width: 80%;
+}
+/* line 96, ../../app/stylesheets/style.scss */
+#notifications-outer #notifications-inner {
+  width: 50%;
+  margin: auto;
+}
+
+/* Paypal Account Related*/
+/* line 116, ../../app/stylesheets/style.scss */
+a.cool-link-blue {
+  background-color: blue;
+  color: white !important;
+  text-decoration: none;
+  padding-left: 3px;
+  padding-right: 3px;
+  border: 1px solid blue;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -o-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -khtml-border-radius: 5px;
+  border-radius: 5px;
+  border-color: black;
+}
+/* line 109, ../../app/stylesheets/style.scss */
+a.cool-link-blue:visited {
+  text-decoration: none;
+}
+/* line 111, ../../app/stylesheets/style.scss */
+a.cool-link-blue:hover {
+  background-color: white;
+  color: blue !important;
+}
+
+/* Transaction Related */
+/* line 121, ../../app/stylesheets/style.scss */
+a.cool-link-green {
+  background-color: green;
+  color: white !important;
+  text-decoration: none;
+  padding-left: 3px;
+  padding-right: 3px;
+  border: 1px solid green;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -o-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -khtml-border-radius: 5px;
+  border-radius: 5px;
+  border-color: black;
+}
+/* line 109, ../../app/stylesheets/style.scss */
+a.cool-link-green:visited {
+  text-decoration: none;
+}
+/* line 111, ../../app/stylesheets/style.scss */
+a.cool-link-green:hover {
+  background-color: white;
+  color: green !important;
+}
+
+/* Devex User Related */
+/* line 126, ../../app/stylesheets/style.scss */
+a.cool-link-orange {
+  background-color: orange;
+  color: black !important;
+  text-decoration: none;
+  padding-left: 3px;
+  padding-right: 3px;
+  border: 1px solid orange;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -o-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -khtml-border-radius: 5px;
+  border-radius: 5px;
+  border-color: black;
+}
+/* line 109, ../../app/stylesheets/style.scss */
+a.cool-link-orange:visited {
+  text-decoration: none;
+}
+/* line 111, ../../app/stylesheets/style.scss */
+a.cool-link-orange:hover {
+  background-color: white;
+  color: orange !important;
+}
+
+/* QB Related */
+/* line 130, ../../app/stylesheets/style.scss */
+a.cool-link-magenta {
+  background-color: magenta;
+  color: white !important;
+  text-decoration: none;
+  padding-left: 3px;
+  padding-right: 3px;
+  border: 1px solid magenta;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -o-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -khtml-border-radius: 5px;
+  border-radius: 5px;
+  border-color: black;
+}
+/* line 109, ../../app/stylesheets/style.scss */
+a.cool-link-magenta:visited {
+  text-decoration: none;
+}
+/* line 111, ../../app/stylesheets/style.scss */
+a.cool-link-magenta:hover {
+  background-color: white;
+  color: magenta !important;
+}
+
+/* Error Related */
+/* line 135, ../../app/stylesheets/style.scss */
+a.cool-link-red {
+  background-color: red;
+  color: white !important;
+  text-decoration: none;
+  padding-left: 3px;
+  padding-right: 3px;
+  border: 1px solid red;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -o-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -khtml-border-radius: 5px;
+  border-radius: 5px;
+  border-color: black;
+}
+/* line 109, ../../app/stylesheets/style.scss */
+a.cool-link-red:visited {
+  text-decoration: none;
+}
+/* line 111, ../../app/stylesheets/style.scss */
+a.cool-link-red:hover {
+  background-color: white;
+  color: red !important;
+}
+
+/* line 139, ../../app/stylesheets/style.scss */
+.paypalaccount-email {
+  font-weight: bold;
+  color: green;
+}
+
+/*
+body.two-col {
+  #container {
+    @include container; }
+  #header, #footer {
+    @include column($blueprint-grid-columns); }
+  #sidebar {
+    /* One third of the grid columns, rounding down. With 24 cols, this is 8. */
+    $sidebar-columns: floor($blueprint-grid-columns / 3);
+    @include column($sidebar-columns); }
+  #content {
+    /* Two thirds of the grid columns, rounding up. */
+    /* With 24 cols, this is 16. */
+    $content-columns: ceil(2 * $blueprint-grid-columns / 3);
+    /* true means it's the last column in the row */
+    @include column($content-columns, true); } }
+*/

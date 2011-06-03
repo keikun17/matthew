@@ -1,0 +1,29 @@
+#page-title
+  %h3 QBD Mapping
+  %h4 List of Mapped Accounts
+#content-options
+  #content-buttons
+    =link_to "Link Devex Accounts", orphans_paypal_accounts_path, :class => "awesome orange"  
+  #content-search
+    =text_field_tag "Search", "Search...", :size => 30
+
+%table.table2
+  %thead
+    %tr
+      %th
+      %th{:scope => "col"} Name
+      %th{:scope => "col"} Devex Account Type
+      %th{:scope => "col"} Paypal Accounts
+      %th{:scope => "col"} Transactions
+      %th{:scope => "col"} QB Account     
+      %th{:scope => "col"} Options
+  %tbody
+    - @devex_users.each do |devex_user|
+      %tr
+        %th{:scope => "row"}= devex_user.username 
+        %td= [devex_user.first_name, devex_user.last_name].join(" ")
+        %td= devex_user.account_type
+        %td= link_to devex_user.paypal_accounts.count, devex_user_paypal_accounts_path(devex_user)
+        %td= link_to devex_user.transactions.count, devex_user_transactions_path(devex_user)
+        %td -----        
+        %td= link_to "Map", "#"

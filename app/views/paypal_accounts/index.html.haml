@@ -1,0 +1,23 @@
+#page-title
+  %h3 
+    Listing
+    = @devex_user.full_name
+    Paypal Accounts
+
+%table.table2
+  %thead
+    %tr
+      %th{:scope => "col"} Paypal Email
+      %th{:scope => "col"} Paypal Name
+      %th{:scope => "col", :colspan => 3} Options
+
+
+  - @paypal_accounts.each do |paypal_account|
+    %tr
+      %td= paypal_account.email
+      %td= paypal_account.full_name
+      %td= link_to 'Show', paypal_account
+      %td= link_to 'Edit', edit_paypal_account_path(paypal_account)
+      %td= link_to 'Destroy', paypal_account, :confirm => 'Are you sure?', :method => :delete 
+
+%br
