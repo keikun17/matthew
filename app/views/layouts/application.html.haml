@@ -32,7 +32,7 @@
           %li.last= link_to "Products", products_path
 
       #sidebar
-        - if File.exists?("app/views/#{params["controller"]}/_sidebar.html.haml")
+        - if File.exists?("#{RAILS_ROOT}/app/views/#{params["controller"]}/_sidebar.html.haml")
           = render :partial => "sidebar"      
         - else
           %ul
