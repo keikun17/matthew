@@ -1,6 +1,6 @@
 #page-title
   %h3 QBD Mapping
-  %h4 Unlinked Paypal Accounts
+  %h4 Reconcile Orphan Paypal Accounts
 #content-options
   #content-buttons
 
@@ -19,6 +19,6 @@
       %tr
         %td= paypal_account.email
         %td= [paypal_account.first_name, paypal_account.last_name].join(" ")
-        %td= link_to "Transactions", "#"
-        %td= link_to "Map", map_paypal_account_path(paypal_account)
+        %td= link_to "#{paypal_account.transactions.count}", "#", :style => "text-decoration:none"
+        %td= link_to "Reconcile", map_paypal_account_path(paypal_account)
       

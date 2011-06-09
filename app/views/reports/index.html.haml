@@ -12,31 +12,40 @@
 #content-options
   %fieldset
     %legend Filter
-    I want a list of 
-    =select_tag "list_of", options_for_select(["Sales Revenues", "Credit Memos", "Total"])
-    %br
-    From
-    = date_select "", ""
-    To
-    = date_select "", ""
-    %br
-    For the Product
-    = select_tag "product", options_for_select(Product.all.map{|x| [x.name, x.id]})
-    %br
-    Total Sales Revenue : 
-    = Transaction.sum(:amount)
-    USD
-    %br
+    - form_tag do 
+      I want a list of 
+      = select_tag "list_of", options_for_select(["Sales Revenues", "Credit Memos", "Total"])
+      %br
+      From
+      = date_select "", ""
+      To
+      = date_select "", ""
+      %br
+      For the Product
+      = select_tag "product", options_for_select(Product.all.map{|x| [x.name, x.id]})
+      %br    
+      = submit_tag "Filter"
+
+    
   
   Export to 
   = link_to "Excel","#", :class => "awesome blue small"
   = link_to "PDF","#", :class => "awesome green small"
 %div{:style => "clear:both"}
+Total Sales Revenue : 
+
+/ = @transactions.sum(:amount)
+/ USD
+  
+%br
+
 %table
   %thead
     %tr
       %th Paypal Transaction ID
-      %th Sender
+      %th Paypal Payer ID
+      %th Paypal Email
+      %th Devex Username
       %th Product
       %th Amount
       %th Date
@@ -47,9 +56,11 @@
         %td=link_to transaction.transaction_reference, transaction_path(transaction)
         %td
           = transaction.paypal_account.payer_id
-          =link_to transaction.paypal_account.devex_user.full_name, devex_user_path(transaction.paypal_account.devex_user), :class => "cool-link-orange" if transaction.paypal_account.devex_user
-          =link_to transaction.paypal_account.email, paypal_account_path(transaction.paypal_account), :class => "cool-link-blue"
-
-        %td --
+        %td
+          / = link_to transaction.paypal_account.email, paypal_account_path(transaction.paypal_account), :class => "cool-link-blue"
+          = transaction.paypal_account.email
+        %td
+          = link_to transaction.paypal_account.devex_user.full_name, devex_user_transactions_path(transaction.paypal_account.devex_user), :class => "cool-link-orange" if transaction.paypal_account.devex_user
+        %td= transaction.product
         %td= transaction.amount.to_s + " USD" unless transaction.amount.blank?
         %td= transaction.created_at

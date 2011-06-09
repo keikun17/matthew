@@ -16,6 +16,6 @@ module ApplicationHelper
   end
   
   def orphan_paypal_accounts_count
-    link_to((PaypalAccount.orphans.count.to_s + " Paypal Accounts"), '#',:class => "cool-link-blue")
+    link_to((PaypalAccount.orphans.count.to_s + " Paypal Accounts"), orphans_paypal_accounts_path,:class => "cool-link-blue")
   end
 end

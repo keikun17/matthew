@@ -1,0 +1,42 @@
+#page-title
+  %h3 Transaction Details
+
+%b Transaction reference : 
+= @transaction.transaction_reference 
+%br
+
+%b Transaction type :
+= @transaction.transaction_type
+%br
+
+%b Transaction Date
+= @transaction.created_at.to_s(:long)
+%br
+
+%b Status :
+= @transaction.status
+%br
+
+%b Paypal Account ID :
+= @transaction.payer_id
+%br
+
+%b Paypal Email :
+= @transaction.payer_email
+%br
+
+%b Amount
+= @transaction.amount
+USD
+
+%fieldset
+  %legend Paypal Transaction Information
+  %table
+    - @transaction.attributes.each do |k, v|
+      - unless k == 'ipn_data'
+        %tr
+        %td= k
+        %td= v
+
+= link_to 'Edit', edit_transaction_path(@transaction)
+= link_to 'Back', transactions_path 

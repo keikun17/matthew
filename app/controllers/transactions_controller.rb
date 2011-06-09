@@ -5,6 +5,9 @@ class TransactionsController < ApplicationController
     if params[:devex_user_id]
       @devex_user = DevexUser.find params[:devex_user_id]
       @transactions = @devex_user.transactions
+    elsif params[:paypal_account_id]
+      @paypal_account = PaypalAccount.find params[:paypal_account_id]
+      @transactions = @paypal_account.transactions
     else
       @transactions = Transaction.all
     end

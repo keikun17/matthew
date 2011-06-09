@@ -13,6 +13,7 @@ Matthew::Application.routes.draw do
     member do 
       get 'map'
     end
+    resources :transactions
   end
   
   devise_for :admins

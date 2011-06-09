@@ -13,7 +13,6 @@ USD
       %th{:scope => "col"} Paypal User
       %th{:scope => "col"} Devex User
       %th{:scope => "col"} Amount
-      %th{:scope => "col", :colspan => 3} Options
 
   - @transactions.each do |transaction|
     %tr
@@ -31,6 +30,3 @@ USD
         - if transaction.amount
           = transaction.amount
           USD
-      %td= link_to 'Show', transaction 
-      %td= link_to 'Edit', edit_transaction_path(transaction) 
-      %td= link_to 'Destroy', transaction, :confirm => 'Are you sure?', :method => :delete
