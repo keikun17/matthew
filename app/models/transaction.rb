@@ -8,6 +8,7 @@ class Transaction < ActiveRecord::Base
   validates :ipn_data, :presence => true
   validates :transaction_reference, :presence => true
   validates :paypal_account_id, :presence => true
+  scope :uploadable, :conditions => ["uploaded_to_qb is null or uploaded_to_qb = ?", false]
   def ipn_account_email 
     self.payer_email
   end

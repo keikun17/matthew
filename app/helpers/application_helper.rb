@@ -18,4 +18,8 @@ module ApplicationHelper
   def orphan_paypal_accounts_count
     link_to((PaypalAccount.orphans.count.to_s + " Paypal Accounts"), orphans_paypal_accounts_path,:class => "cool-link-blue")
   end
+  
+  def uploadable_transactions_count
+    link_to(Transaction.uploadable.count.to_s + " Transactions", '#',:class => "cool-link-red") 
+  end
 end

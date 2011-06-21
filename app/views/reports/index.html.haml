@@ -8,7 +8,8 @@
     = orphan_paypal_accounts_count
     needs to get linked
     %br
-    = link_to("5 Transactions", '#',:class => "cool-link-red") + " failed to update Quickbooks and must be updated manually #featurepending#"
+    = uploadable_transactions_count
+    failed to update Quickbooks and must be updated manually
 #content-options
   %fieldset
     %legend Filter
@@ -62,4 +63,4 @@ Total Sales Revenue :
         %td= transaction.product
         %td= transaction.amount.to_s + " USD" unless transaction.amount.blank?
         %td= transaction.created_at
-        %td= transaction.uploaded_to_qb?
+        %td= link_to transaction.uploaded_to_qb?.to_s, upload_to_qb_transaction_path(transaction)

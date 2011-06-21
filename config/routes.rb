@@ -18,7 +18,11 @@ Matthew::Application.routes.draw do
   
   devise_for :admins
 
-  resources :transactions
+  resources :transactions do 
+    member do 
+      get 'upload_to_qb'
+    end
+  end
   match '/ipn' => 'paypal#ipn'
   match '/mapping' => 'mapping#index'
   match '/reports' => 'reports#index'

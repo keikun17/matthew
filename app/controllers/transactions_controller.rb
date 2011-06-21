@@ -88,4 +88,20 @@ class TransactionsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
+  def upload_to_qb
+    @transaction = Transaction.find(params[:id])
+    @transaction.upload_to_quickbooks
+    if @transaction.uploaded_to_qb
+      flash[:success]
+    else
+        if @transaction.paypal_account and @transaction.paypal_account.devex_user and !@transaction.paypal_account.devex_user.qb_member_name.blank?
+          flash[:error] = "Incomplete Mapping"
+        else
+          flash[:error] = "Error encountered while trying to upload transaction to QB"
+        end
+    end
+    redirect_to request.referer
+  end
+  
 end
