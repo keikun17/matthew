@@ -17,18 +17,19 @@ class Qboe
       today = Time.now.strftime("%Y-%m-%d")
       xml_to_send = ERB.new(get_file_as_string("lib/qb_integration/customer.erb")).result(binding) 
       result = post('/', :body => xml_to_send )
-      logger.info result
+      Rails.logger.info result
       result["QBXML"]["QBXMLMsgsRs"]["CustomerQueryRs"]["CustomerRet"]["ListID"]
   end
   
   def self.create_invoice(customer_name,items)
       today = Time.now.strftime("%Y-%m-%d")
       customer_id = find_customer_id(customer_name)
+      full_name = customer_name
       session = self.getSession
       xml_to_send = ERB.new(get_file_as_string("lib/qb_integration/invoice.erb")).result(binding) 
       result = post('/', :body => xml_to_send )
       puts "result : " + result.inspect
-      logger.info result
+      Rails.logger.info result
       result["QBXML"]["QBXMLMsgsRs"]["InvoiceAddRs"]["InvoiceRet"]
   end
   
@@ -37,7 +38,7 @@ class Qboe
       xml_to_send = ERB.new(get_file_as_string("lib/qb_integration/session.erb")).result(binding) 
       result = post('/', :body => xml_to_send )
       puts "result:" + result.inspect
-      logger.info result
+      Rails.logger.info result
       result["QBXML"]["SignonMsgsRs"]["SignonDesktopRs"]["SessionTicket"]
   end
     
