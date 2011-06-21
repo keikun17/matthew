@@ -49,6 +49,7 @@ class PaypalController < ApplicationController
     @transaction.custom = params[:custom]
     @transaction.product = params[:item_name]
     if notify.acknowledge
+      @transaction.symbolize_keys!
       @transaction.save
     else
       @transaction.save(false)
