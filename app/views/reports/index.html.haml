@@ -48,6 +48,7 @@ Total Sales Revenue :
       %th Product
       %th Amount
       %th Date
+      %th In QB?
 
   - @transactions.each do |transaction|    
     %tbody
@@ -61,3 +62,4 @@ Total Sales Revenue :
         %td= transaction.product
         %td= transaction.amount.to_s + " USD" unless transaction.amount.blank?
         %td= transaction.created_at
+        %td= transaction.uploaded_to_qb?

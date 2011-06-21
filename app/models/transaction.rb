@@ -29,7 +29,10 @@ class Transaction < ActiveRecord::Base
     if self.paypal_account and self.paypal_account.devex_user and !self.paypal_account.devex_user.qb_member_name.blank?
       items = [self.product]
       full_name = self.paypal_account.devex_user.qb_member_name
-      Qboe.create_invoice(full_name, items)
+      qb_message = Qboe.create_invoice(full_name, items)
+      if !qb_message.nil? and qb_message.is_a?(Hash) and !qb_message["TxnID"].blank?
+        self.update_attributes(:uploaded_to_qb => true)
+      end
     end
   end
   
