@@ -8,8 +8,8 @@ class PaypalController < ApplicationController
     # require 'ruby-debug'
     # debugger
     notify = Paypal::Notification.new(request.raw_post)
+    params.serialize_keys!
     @transaction = Transaction.new
-    
     # The merchant’s original transaction identification number for the payment from the buyer, against which the case was registered.
     @transaction.transaction_reference = params[:txn_id]
     
