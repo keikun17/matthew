@@ -46,10 +46,11 @@ class PaypalController < ApplicationController
     @transaction.custom = params[:custom]
     @transaction.product = params[:item_name]
     if @transaction.save and notify.acknowledge
-      render :nothing => true
+      
     else
-     logger.debug(@transcation.errors.full_messages)
+      logger.fatal(@transaction.errors.full_messages)
       @transaction.destroy
     end
+      render :nothing => true
   end  
 end
