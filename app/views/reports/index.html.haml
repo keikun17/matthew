@@ -43,7 +43,6 @@ Total Sales Revenue :
   %thead
     %tr
       %th Paypal Transaction ID
-      %th Paypal Payer ID
       %th Paypal Email
       %th Devex Username
       %th Product
@@ -54,8 +53,6 @@ Total Sales Revenue :
     %tbody
       %tr
         %td=link_to transaction.transaction_reference, transaction_path(transaction)
-        %td
-          = transaction.paypal_account.payer_id
         %td
           / = link_to transaction.paypal_account.email, paypal_account_path(transaction.paypal_account), :class => "cool-link-blue"
           = transaction.paypal_account.email
