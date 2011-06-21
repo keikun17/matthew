@@ -13,10 +13,11 @@ class Transaction < ActiveRecord::Base
   # for non-payment transactions, the ipn_account_id is expected to be nil
   def create_paypal_account
     unless ipn_data.nil? or !paypal_account.nil? or payer_email.blank?
-      self.paypal_account.create(:email => payer_email,
+      paypal_account = self.build_paypal_account(:email => payer_email,
         :payer_id => payer_id,
         :first_name => ipn_data["first_name"],
         :last_name => ipn_data["last_name"])
+      return paypal_account.save
     end 
   end
 end

@@ -48,13 +48,10 @@ class PaypalController < ApplicationController
   
     @transaction.custom = params[:custom]
     @transaction.product = params[:item_name]
-    if notify.acknowledge
-      @transaction.save
+    if @transaction.save and notify.acknowledge
+      render :nothing => true
     else
-      @transaction.save(false)
+      @transaction.destroy
     end
-    
-    render :nothing => true
-  end
-  
+  end  
 end
