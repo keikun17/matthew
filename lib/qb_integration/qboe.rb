@@ -17,7 +17,7 @@ class Qboe
       today = Time.now.strftime("%Y-%m-%d")
       xml_to_send = ERB.new(get_file_as_string("lib/qb_integration/customer.erb")).result(binding) 
       result = post('/', :body => xml_to_send )
-      puts result
+      logger.info result
       result["QBXML"]["QBXMLMsgsRs"]["CustomerQueryRs"]["CustomerRet"]["ListID"]
   end
   
@@ -28,6 +28,7 @@ class Qboe
       xml_to_send = ERB.new(get_file_as_string("lib/qb_integration/invoice.erb")).result(binding) 
       result = post('/', :body => xml_to_send )
       puts "result : " + result.inspect
+      logger.info result
       result["QBXML"]["QBXMLMsgsRs"]["InvoiceAddRs"]["InvoiceRet"]
   end
   
@@ -36,6 +37,7 @@ class Qboe
       xml_to_send = ERB.new(get_file_as_string("lib/qb_integration/session.erb")).result(binding) 
       result = post('/', :body => xml_to_send )
       puts "result:" + result.inspect
+      logger.info result
       result["QBXML"]["SignonMsgsRs"]["SignonDesktopRs"]["SessionTicket"]
   end
     
