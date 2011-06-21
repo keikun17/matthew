@@ -49,7 +49,6 @@ class PaypalController < ApplicationController
       
     else
       logger.fatal(@transaction.errors.full_messages)
-      @transaction.destroy
     end
       render :nothing => true
   end  
