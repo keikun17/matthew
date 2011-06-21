@@ -3,6 +3,8 @@ class Transaction < ActiveRecord::Base
   belongs_to :paypal_account
   before_validation :set_or_create_paypal_account
   validates_associated :paypal_account
+  after_create :upload_to_quickbooks
+  
   validates :ipn_data, :presence => true
   validates :transaction_reference, :presence => true
   validates :paypal_account_id, :presence => true
