@@ -1,10 +1,9 @@
 class Transaction < ActiveRecord::Base
   serialize :ipn_data, Hash
   belongs_to :paypal_account
-  before_validation :find_or_create_paypal_account
+  before_save :find_or_create_paypal_account
   validates_associated :paypal_account
   validates_presence_of :ipn_data, :transaction_reference
-
   
   def ipn_account_email 
     self.payer_email
