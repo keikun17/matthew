@@ -10,7 +10,7 @@ class PaypalController < ApplicationController
     notify = Paypal::Notification.new(request.raw_post)
     @transaction = Transaction.new
     # The merchant’s original transaction identification number for the payment from the buyer, against which the case was registered.
-    @transaction.transaction_reference = params[:txn_id]
+    @transaction.transaction_reference = params[:txn_id]    
     
     # params[:txn_type] is the kind of transaction for which the IPN message was sent
     @transaction.transaction_type = params[:txn_type]
@@ -37,7 +37,6 @@ class PaypalController < ApplicationController
 
     # Customer’s primary email address. Use this email to provide any credits
     @transaction.payer_email = params[:payer_email]
-    
     # Unique customer ID
     @transaction.payer_id = params[:payer_id]
 
