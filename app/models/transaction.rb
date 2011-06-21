@@ -22,5 +22,14 @@ class Transaction < ActiveRecord::Base
       self.paypal_account_id = self.paypal_account.id
     end 
   end
+  
+  def upload_to_quickbooks
+    if self.paypal_account and self.paypal_account.devex_user and !self.paypal_account.devex_user.qb_member_name.blank?
+      items = [self.product]
+      full_name = self.paypal_account.devex_user.qb_member_name
+      Qboe.create_invoice(full_name, items)
+    end
+  end
+  
 end
 

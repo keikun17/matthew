@@ -3,16 +3,17 @@
 <QBXML> 
 	<SignonMsgsRq>
 		<SignonTicketRq> 
-			<ClientDateTime><%=today%></ClientDateTime> 
-			<SessionTicket><%=session%></SessionTicket>
+			<ClientDateTime><%= today %></ClientDateTime> 
+			<SessionTicket><%= session %></SessionTicket>
 			<Language>English</Language> 
-			<AppID><%=APPLICATION_ID%></AppID>
+			<AppID><%= QB_APP_ID %></AppID>
 			<AppVer>1</AppVer> 
 		</SignonTicketRq> 
 	</SignonMsgsRq> 
 	<QBXMLMsgsRq onError="continueOnError">
-  		<CustomerQueryRq requestID="<%=request_id%>">
-  			<FullName><%=full_name%></FullName>
+  		<CustomerQueryRq requestID="<%= request_id %>">
+  			<FullName><%= full_name %></FullName>
   		</CustomerQueryRq>
   	</QBXMLMsgsRq>
 </QBXML>
+

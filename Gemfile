@@ -38,6 +38,7 @@ gem "compass", ">= 0.11.1"
 gem 'formtastic'
 gem 'will_paginate'
 gem 'pg'
+gem 'httparty'
 
 group :test do
   gem 'cucumber-rails'

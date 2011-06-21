@@ -60,7 +60,7 @@ class DevexUsersController < ApplicationController
 
     respond_to do |format|
       if @devex_user.update_attributes(params[:devex_user])
-        format.html { redirect_to(@devex_user, :notice => 'Devex user was successfully updated.') }
+        format.html { redirect_to(mapping_path, :notice => 'Devex user was successfully updated.') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

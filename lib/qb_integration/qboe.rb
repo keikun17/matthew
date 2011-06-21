@@ -3,13 +3,13 @@ require 'httparty'
 
 class Qboe
   include HTTParty
-  base_uri 'https://webapps.quickbooks.com/j/AppGateway'
+  base_uri 'https://apps.quickbooks.com/j/AppGateway'
   format :xml
   headers 'Content-Type' => 'application/x-qbxml' 
 
-  APPLICATION_LOGIN = 'your application login'
-  CONNECTION_TICKET = 'your connection ticket'
-  APPLICATION_ID = 'your application id'
+  # APPLICATION_LOGIN = 'your application login'
+  # CONNECTION_TICKET = 'your connection ticket'
+  # APPLICATION_ID = 'your application id'
   
   def self.find_customer_id(full_name)
       request_id = '123'
@@ -17,7 +17,7 @@ class Qboe
       today = Time.now.strftime("%Y-%m-%d")
       xml_to_send = ERB.new(get_file_as_string("lib/qb_integration/customer.erb")).result(binding) 
       result = post('/', :body => xml_to_send )
-      debugger
+      puts result
       result["QBXML"]["QBXMLMsgsRs"]["CustomerQueryRs"]["CustomerRet"]["ListID"]
   end
   

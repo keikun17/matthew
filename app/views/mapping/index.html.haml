@@ -14,9 +14,9 @@
       %th{:scope => "col"} Name
       %th{:scope => "col"} Devex Account Type
       %th{:scope => "col"} Paypal Accounts
-      %th{:scope => "col"} Transactions
       %th{:scope => "col"} QB Account     
-      %th{:scope => "col"} Options
+      %th{:scope => "col"} Transactions
+      
   %tbody
     - @devex_users.each do |devex_user|
       %tr
@@ -24,6 +24,8 @@
         %td= [devex_user.first_name, devex_user.last_name].join(" ")
         %td= devex_user.account_type
         %td= link_to devex_user.paypal_accounts.count, devex_user_paypal_accounts_path(devex_user)
+        - if devex_user.qb_member_name.blank?
+          %td= link_to "Edit", edit_devex_user_path(devex_user)
+        - else
+          %td= link_to devex_user.qb_member_name, edit_devex_user_path(devex_user), :class => "cool-link-magenta"
         %td= link_to devex_user.transactions.count, devex_user_transactions_path(devex_user)
-        %td -----        
-        %td= link_to "Map", "#"

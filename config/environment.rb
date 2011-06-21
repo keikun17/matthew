@@ -19,3 +19,7 @@ unless ::Rails.env == 'production'
 else
   PAYPAL_ACCOUNT = 'paypalaccount@example.com'
 end
+
+QB_APP_LOGIN = "matthew.matthew.devex.com"
+QB_CONNECTION_TICKET = "TGT-63-k9LFQUnw8AkcYiSNKHus_Q"
+QB_APP_ID = "209654516"
