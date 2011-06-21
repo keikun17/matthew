@@ -1,7 +1,7 @@
 class Transaction < ActiveRecord::Base
   serialize :ipn_data, Hash
   belongs_to :paypal_account
-  before_validation :create_paypal_account, :if => Proc.new{|transaction| transaction.paypal_account.nil?}
+  before_validation :set_or_create_paypal_account
   validates_associated :paypal_account
   validates :ipn_data, :presence => true
   validates :transaction_reference, :presence => true
@@ -11,8 +11,9 @@ class Transaction < ActiveRecord::Base
   end
   
   # for non-payment transactions, the ipn_account_id is expected to be nil
-  def create_paypal_account
-    unless ipn_data.nil? or !paypal_account.nil? or payer_email.blank?
+  def set_or_create_paypal_account
+    self.paypal_account = PaypalAccount.find_by_email(payer_email)
+    unless ipn_data.nil? or !self.paypal_account.nil? or payer_email.blank?
       pp_account = self.build_paypal_account(:email => payer_email,
         :payer_id => payer_id,
         :first_name => ipn_data["first_name"],
