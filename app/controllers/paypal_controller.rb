@@ -10,11 +10,10 @@ class PaypalController < ApplicationController
     notify = Paypal::Notification.new(request.raw_post)
     @transaction = Transaction.new
     # The merchant’s original transaction identification number for the payment from the buyer, against which the case was registered.
-    @transaction.transaction_reference = params[:txn_id]    
+    @transaction.transaction_reference = params[:txn_id]
     
     # params[:txn_type] is the kind of transaction for which the IPN message was sent
     @transaction.transaction_type = params[:txn_type]
-
     # The status of the payment:
     #  Canceled_Reversal: A reversal has been canceled. For example, you won a dispute with the customer, and the funds for the transaction that was reversed have been returned to you.
     #  Completed: The payment has been completed, and the funds have been added successfully to your account balance.
@@ -49,6 +48,7 @@ class PaypalController < ApplicationController
     if @transaction.save and notify.acknowledge
       render :nothing => true
     else
+     logger.debug(@transcation.errors.full_messages)
       @transaction.destroy
     end
   end  
