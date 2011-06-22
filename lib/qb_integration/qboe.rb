@@ -35,10 +35,10 @@ class Qboe
       Rails.logger.info params
       txn_id = params["TxnID"]
       amount = params["Subtotal"]
-      create_payment(full_name, txn_id, amount)
+      create_payment(full_name, txn_id, amount, ref_number, memo)
   end
   
-  def self.create_payment(customer_name, txn_id, amount)
+  def self.create_payment(customer_name, txn_id, amount, ref_number, memo)
     today = Time.now.strftime("%Y-%m-%d")
     customer_id = find_customer_id(customer_name)
     full_name = customer_name
