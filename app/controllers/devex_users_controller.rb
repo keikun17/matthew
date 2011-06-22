@@ -57,9 +57,11 @@ class DevexUsersController < ApplicationController
   # PUT /devex_users/1.xml
   def update
     @devex_user = DevexUser.find(params[:id])
-
     respond_to do |format|
       if @devex_user.update_attributes(params[:devex_user])
+        @devex_user.transactions.uploadable.each do |transaction|
+          transaction.upload_to_quickbooks
+        end
         format.html { redirect_to(mapping_path, :notice => 'Devex user was successfully updated.') }
         format.xml  { head :ok }
       else
