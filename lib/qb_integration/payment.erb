@@ -32,11 +32,10 @@
 					<ListID></ListID>
 					<FullName></FullName>
 				</DepositToAccountRef>-->
-				<!--<AppliedToTxnAdd>
-					<TxnID>12006-1196864828</TxnID>
-					<PaymentAmount>195.00</PaymentAmount>
-				</AppliedToTxnAdd>-->
-				<IsAutoApply>true</IsAutoApply>
+				<AppliedToTxnAdd>
+					<TxnID><%= txn_id %></TxnID>
+					<PaymentAmount><%= amount %></PaymentAmount>
+				</AppliedToTxnAdd>
 				<!-- If you don't want to apply payments manually to a particular transaction, use <IsAutoApply>true</IsAutoApply> -->
 				<!--   instead of the <AppliedToTxn> node. QuickBooks will make it's best guess how to apply the payment. -->
 			</ReceivePaymentAdd>

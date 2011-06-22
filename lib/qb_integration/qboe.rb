@@ -30,10 +30,13 @@ class Qboe
       result = post('/', :body => xml_to_send )
       puts "result : " + result.inspect
       Rails.logger.info result
-      result["QBXML"]["QBXMLMsgsRs"]["InvoiceAddRs"]["InvoiceRet"]
+      params = result["QBXML"]["QBXMLMsgsRs"]["InvoiceAddRs"]["InvoiceRet"]
+      txn_id = params["TxnID"]
+      amount = params["Subtotal"]
+      create_payment(full_name, txn_id, amount)
   end
   
-  def self.create_payment(customer_name)
+  def self.create_payment(full_name, txn_id, amount)
     today = Time.now.strftime("%Y-%m-%d")
     customer_id = find_customer_id(customer_name)
     full_name = customer_name
@@ -41,8 +44,8 @@ class Qboe
     xml_to_send = ERB.new(get_file_as_string("lib/qb_integration/payment.erb")).result(binding) 
     result = post('/', :body => xml_to_send )
     puts "result : " + result.inspect
+    Rails.logger.info "-----"
     Rails.logger.info result
-    result["QBXML"]["QBXMLMsgsRs"]["InvoiceAddRs"]["InvoiceRet"]
   end
   
   def self.getSession
