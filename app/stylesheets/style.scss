@@ -103,9 +103,10 @@ $blueprint_grid_width: 40px;
 	text-decoration:none;
 	padding-left:3px;
 	padding-right:3px;
-	border:1px solid $cool-link-color;
+	border:1px solid $cool-link-color !important;
 	@include border-radius(5px);
-	border-color:black;
+	border-color:black !important;
+	text-shadow:none !important;
 	&:visited{
 		text-decoration:none;}
 	&:hover{

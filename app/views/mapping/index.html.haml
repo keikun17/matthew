@@ -27,5 +27,5 @@
         - if devex_user.qb_member_name.blank?
           %td= link_to "Edit", edit_devex_user_path(devex_user)
         - else
-          %td= link_to devex_user.qb_member_name, edit_devex_user_path(devex_user), :class => "cool-link-magenta"
+          %td= link_to devex_user.qb_member_name, edit_devex_user_path(devex_user), :class => "cool-link-red"
         %td= link_to devex_user.transactions.count, devex_user_transactions_path(devex_user)
