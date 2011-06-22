@@ -25,7 +25,7 @@ USD
         )
       %td
         - if transaction.paypal_account and transaction.paypal_account.devex_user 
-          =link_to transaction.paypal_account.devex_user.full_name, devex_user_path(transaction.paypal_account.devex_user)
+          =link_to transaction.paypal_account.devex_user.full_name, devex_user_transactions_path(transaction.paypal_account.devex_user)
       %td
         - if transaction.amount
           = transaction.amount
