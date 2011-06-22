@@ -40,7 +40,7 @@ class Qboe
   
   def self.create_payment(full_name, txn_id, amount)
     today = Time.now.strftime("%Y-%m-%d")
-    customer_id = find_customer_id(customer_name)
+    customer_id = find_customer_id(full_name)
     full_name = customer_name
     session = self.getSession
     xml_to_send = ERB.new(get_file_as_string("lib/qb_integration/payment.erb")).result(binding) 
