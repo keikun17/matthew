@@ -31,6 +31,8 @@ class Qboe
       puts "result : " + result.inspect
       Rails.logger.info result
       params = result["QBXML"]["QBXMLMsgsRs"]["InvoiceAddRs"]["InvoiceRet"]
+      Rails.logger.info "---- InvoiceRet ---"
+      Rails.logger.info params
       txn_id = params["TxnID"]
       amount = params["Subtotal"]
       create_payment(full_name, txn_id, amount)
