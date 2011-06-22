@@ -1,5 +1,5 @@
 #page-title
-  %h3 Link Paypal Accounts to Devex and Quickbooks
+  %h3 Link Paypal Accounts to Devex
   %h4
   
     = "Name : " + [@paypal_account.first_name, @paypal_account.last_name].join(" ")
@@ -25,9 +25,8 @@
     %tr
       %th{:scope => "col"} 
       %th{:scope => "col"} Service Level
-      %th{:scope => "col"} -------------
-      %th{:scope => "col"} -------------
-      %th{:scope => "col"} -------------             
+      %th{:scope => "col"} Join Date
+      %th{:scope => "col"} Company             
       %th{:scope => "col"} Options
   %tbody
     -@consultants.each do |consultant|
@@ -36,38 +35,37 @@
         %td= consultant.service_level_id
         %td
         %td
-        %td
         %td= link_to "Connect", mapping_do_map_path(:consultant_id => consultant.id, :paypal_account_id => params[:id]), :class => "awesome blue"
-%hr
-%h2.awesome Quickbooks
-
-#content-options
-  #content-buttons
-
-  #content-search
-    =text_field_tag "Search", "Search...", :size => 30
-    =radio_button_tag "Consultant", ""
-    Consultant
-    =radio_button_tag "Company", ""
-    Company
-
-%table.table2
-  %thead
-    %tr
-      %th{:scope => "col"} 
-      %th{:scope => "col"} temp
-      %th{:scope => "col"} temp
-      %th{:scope => "col"} temp            
-      %th{:scope => "col"} temp
-      %th{:scope => "col"} temp
-      
-      %th{:scope => "col"} Options
-  %tbody
-    %tr
-      %th{:scope => "row"} Quickbooks Member Name Here
-      %td temp
-      %td temp
-      %td temp
-      %td temp
-      %td temp
-      %td= link_to "Connect", "#", :class => "awesome magenta"
+/ %hr
+/ %h2.awesome Quickbooks
+/ 
+/ #content-options
+/   #content-buttons
+/ 
+/   #content-search
+/     =text_field_tag "Search", "Search...", :size => 30
+/     =radio_button_tag "Consultant", ""
+/     Consultant
+/     =radio_button_tag "Company", ""
+/     Company
+/ 
+/ %table.table2
+/   %thead
+/     %tr
+/       %th{:scope => "col"} 
+/       %th{:scope => "col"} temp
+/       %th{:scope => "col"} temp
+/       %th{:scope => "col"} temp            
+/       %th{:scope => "col"} temp
+/       %th{:scope => "col"} temp
+/       
+/       %th{:scope => "col"} Options
+/   %tbody
+/     %tr
+/       %th{:scope => "row"} Quickbooks Member Name Here
+/       %td temp
+/       %td temp
+/       %td temp
+/       %td temp
+/       %td temp
+/       %td= link_to "Connect", "#", :class => "awesome magenta"

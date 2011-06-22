@@ -1,6 +1,6 @@
 #page-title
-  %h3 QBD Mapping
-  %h4 Reconcile Orphan Paypal Accounts
+  %h3 Incoming Paypal Accounts
+  %h4 Lists New Paypal Accounts registered to the system by Paypal 
 #content-options
   #content-buttons
 
@@ -20,5 +20,5 @@
         %td= paypal_account.email
         %td= [paypal_account.first_name, paypal_account.last_name].join(" ")
         %td= link_to "#{paypal_account.transactions.count}", "#", :style => "text-decoration:none"
-        %td= link_to "Reconcile", map_paypal_account_path(paypal_account)
+        %td= link_to "Link to Devex Account", map_paypal_account_path(paypal_account)
       

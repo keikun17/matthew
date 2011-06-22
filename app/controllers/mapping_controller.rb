@@ -15,13 +15,17 @@ class MappingController < ApplicationController
         :last_name => @consultant.last_name)
       if @devex_user.save
         if @paypal_account.update_attributes(:devex_user_id => @devex_user.id)
+          flash[:notice] = "#{@paypal_account.email} has been succesfully mapped to #{@devex_user.username}"
           redirect_to '/mapping'
         end
       end
     else
       @paypal_account.devex_user_id = @devex_user.id
       if @paypal_account.save
-        redirect_to '/mapping'
+        if @paypal_account.update_attributes(:devex_user_id => @devex_user.id)
+          flash[:notice] = "#{@paypal_account.email} has been succesfully mapped to #{@devex_user.username}"
+          redirect_to '/mapping'
+        end
       end
     end
   end
