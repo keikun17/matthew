@@ -136,7 +136,7 @@ table.table2 {
 
 /* line 66, ../../app/stylesheets/partials/_fancy_tables.scss */
 .table2 tbody th {
-  text-align: right;
+  text-align: left;
   padding: 10px;
   color: #333;
   text-shadow: 1px 1px 1px #ccc;
