@@ -54,8 +54,9 @@ class Transaction < ActiveRecord::Base
     when 'credit'
       if self.paypal_account and self.paypal_account.devex_user and !self.paypal_account.devex_user.qb_member_name.blank?
         amount = self.amount
+        items = [self.product]
         full_name = self.paypal_account.devex_user.qb_member_name
-        qb_message = Qboe.create_credit(full_name, amount)
+        qb_message = Qboe.create_credit(full_name, amount, items)
         self.update_attributes(:uploaded_to_qb => true)
       end      
     end
