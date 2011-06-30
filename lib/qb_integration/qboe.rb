@@ -40,6 +40,7 @@ class Qboe
   
   def self.create_credit(customer_name, amount, items)
     today = Time.now.strftime("%Y-%m-%d")
+    amount = amount.abs
     customer_id = find_customer_id(customer_name)
     full_name = customer_name
     session = self.getSession
