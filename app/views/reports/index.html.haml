@@ -65,6 +65,6 @@ USD
         %td
           = link_to transaction.paypal_account.devex_user.full_name, devex_user_transactions_path(transaction.paypal_account.devex_user), :class => "cool-link-orange" if transaction.paypal_account.devex_user
         %td= transaction.product
-        %td{:style => "font-weight:strong;color:#{transaction.classification.eql?('credit') : 'red' ; 'green'}"}= transaction.amount.to_s + " USD" unless transaction.amount.blank?
+        %td{:style => "font-weight:strong;color:#{transaction.classification.eql?('credit') ? 'red' : 'green'}"}= transaction.amount.to_s + " USD" unless transaction.amount.blank?
         %td= transaction.created_at
         %td= link_to transaction.uploaded_to_qb?.to_s, upload_to_qb_transaction_path(transaction)
