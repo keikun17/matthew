@@ -35,13 +35,12 @@
 %div{:style => "clear:both"}
 
 - if params[:list_of] == 'credit'
-  Total Amount Credited
-  = @transactions.sum(:amount)
-  USD
+  Total Amount Credited : 
 - else
   Total Sales Revenue : 
-  = @transactions.sum(:amount)
-  USD
+
+= @transactions.map{|x| x.amount}.sum
+USD
   
 %br
 
