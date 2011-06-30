@@ -1,6 +1,10 @@
 class Transaction < ActiveRecord::Base
+  
+  CREDIT_TXN_TYPES = ["adjustment"]
+  
   serialize :ipn_data, Hash
   belongs_to :paypal_account
+  before_validation :set_classification
   before_validation :set_or_create_paypal_account
   validates_associated :paypal_account
   after_create :upload_to_quickbooks
@@ -9,9 +13,21 @@ class Transaction < ActiveRecord::Base
   validates :transaction_reference, :presence => true
   validates :paypal_account_id, :presence => true
   scope :uploadable, :conditions => ["uploaded_to_qb is null or uploaded_to_qb = ?", false]
+  scope :invoices, :conditions => {:classification => 'invoice'}
+  scope :credits, :conditions => {:classification => 'credit'}
   def ipn_account_email 
     self.payer_email
   end
+  
+  def set_classification
+    if credit_transaction_type?
+      self.classification = 'credit'
+      self.parent_transaction_id = self[:ipn_data]["parent_txn_id"]
+      self.product = self.parent_transaction.product unless self.parent_transaction.nil?
+    else
+      self.classification = 'invoice'
+    end
+  end  
   
   # for non-payment transactions, the ipn_account_id is expected to be nil
   def set_or_create_paypal_account
@@ -27,13 +43,30 @@ class Transaction < ActiveRecord::Base
   end
   
   def upload_to_quickbooks
-    if self.paypal_account and self.paypal_account.devex_user and !self.paypal_account.devex_user.qb_member_name.blank?
-      items = [self.product]
-      full_name = self.paypal_account.devex_user.qb_member_name
-      qb_message = Qboe.create_invoice(full_name, items)
-      # if !qb_message.nil? and qb_message.is_a?(Hash) and !qb_message["TxnID"].blank?
-      self.update_attributes(:uploaded_to_qb => true)
+    case self.classification
+    when 'invoice'
+      if self.paypal_account and self.paypal_account.devex_user and !self.paypal_account.devex_user.qb_member_name.blank?
+        items = [self.product]
+        full_name = self.paypal_account.devex_user.qb_member_name
+        qb_message = Qboe.create_invoice(full_name, items)
+        self.update_attributes(:uploaded_to_qb => true)
+      end
+    when 'credit'
+      if self.paypal_account and self.paypal_account.devex_user and !self.paypal_account.devex_user.qb_member_name.blank?
+        amount = self.amount
+        full_name = self.paypal_account.devex_user.qb_member_name
+        qb_message = Qboe.create_credit(full_name, amount)
+        self.update_attributes(:uploaded_to_qb => true)
+      end      
     end
+  end
+  
+  def parent_transaction
+    Transaction.find(self.parent_transaction_id)
+  end
+  
+  def credit_transaction_type?
+    CREDIT_TXN_TYPES.include?(self.transaction_type)
   end
   
 end

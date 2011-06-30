@@ -38,6 +38,18 @@ class Qboe
       create_payment(full_name, txn_id, amount)
   end
   
+  def self.create_credit(customer_name, amount, items)
+    today = Time.now.strftime("%Y-%m-%d")
+    customer_id = find_customer_id(customer_name)
+    full_name = customer_name
+    session = self.getSession
+    xml_to_send = ERB.new(get_file_as_string("lib/qb_integration/credit.erb")).result(binding) 
+    result = post('/', :body => xml_to_send )
+    puts "result : " + result.inspect
+    Rails.logger.info "-----"
+    Rails.logger.info result
+  end
+  
   def self.create_payment(customer_name, txn_id, amount)
     today = Time.now.strftime("%Y-%m-%d")
     customer_id = find_customer_id(customer_name)
@@ -48,6 +60,9 @@ class Qboe
     puts "result : " + result.inspect
     Rails.logger.info "-----"
     Rails.logger.info result
+  end
+  
+  def self.create_credit_memo(customer_name, amount)
   end
   
   def self.getSession

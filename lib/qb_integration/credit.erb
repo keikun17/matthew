@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?qbxml version="2.1"?>
+<QBXML>
+  <SignonMsgsRq>
+		<SignonTicketRq> 
+			<ClientDateTime><%=today%></ClientDateTime> 
+			<SessionTicket><%=session%></SessionTicket>
+			<Language>English</Language> 
+			<AppID><%= QB_APP_ID %></AppID>
+			<AppVer>1</AppVer> 
+		</SignonTicketRq> 
+	</SignonMsgsRq>
+	<QBXMLMsgsRq onError="stopOnError">
+
+	  <CreditMemoAddRq>
+	    <CreditMemoAdd>
+				<CustomerRef>
+					<!-- <ListID>F230000-1196864585</ListID> -->
+					<FullName><%= full_name%></FullName> <!-- You can specify either ListID or FullName -->
+				</CustomerRef>
+				<% items.each do |item| %>
+ 				  <CreditMemoLineAdd>
+   					<ItemRef>
+   						<FullName><%=item%></FullName>
+   					</ItemRef>
+   					<Quantity>1</Quantity>
+   					<Amount><%= amount %></Amount>
+   				</CreditMemoLineAdd>
+ 			  <%end%>
+      </CreditMemoAdd>
+    </CreditMemoAddRq>	  
+	</QBXMLMsgsRq>
+</QBXML>
