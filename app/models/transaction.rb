@@ -22,7 +22,7 @@ class Transaction < ActiveRecord::Base
   def set_classification
     if credit_transaction_type?
       self.classification = 'credit'
-      self.parent_transaction_id.to_s = self[:ipn_data]["parent_txn_id"]
+      self.parent_transaction_id = self[:ipn_data]["parent_txn_id"].to_s
       self.product = self.parent_transaction.product unless self.parent_transaction.nil?
     else
       self.classification = 'invoice'
