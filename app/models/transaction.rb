@@ -12,6 +12,7 @@ class Transaction < ActiveRecord::Base
   validates :ipn_data, :presence => true
   validates :transaction_reference, :presence => true
   validates :paypal_account_id, :presence => true
+  default_scope :order => "created_at desc"
   scope :uploadable, :conditions => ["uploaded_to_qb is null or uploaded_to_qb = ?", false]
   scope :invoices, :conditions => {:classification => 'invoice'}
   scope :credits, :conditions => {:classification => 'credit'}
