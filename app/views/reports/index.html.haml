@@ -33,10 +33,15 @@
   = link_to "Excel","#", :class => "awesome blue small"
   = link_to "PDF","#", :class => "awesome green small"
 %div{:style => "clear:both"}
-Total Sales Revenue : 
 
-/ = @transactions.sum(:amount)
-/ USD
+- if params[:list_of] == 'credit'
+  Total Amount Credited
+  = @transactions.sum(:amount)
+  USD
+- else
+  Total Sales Revenue : 
+  = @transactions.sum(:amount)
+  USD
   
 %br
 
