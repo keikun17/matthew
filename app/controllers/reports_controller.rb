@@ -8,13 +8,13 @@ class ReportsController < ApplicationController
       case params[:list_of]
       when 'invoice'
         @transactions = Transaction.invoices.find(:all,
-          :conditions => ["product = ? and created_at between ?", 
+          :conditions => ["product = ? and created_at between ? and ?", 
             @product.paypal_product_code,
             date_from.to_s(:db),
             date_to.to_s(:fb)])
       when 'credit'
         @transactions = Transaction.credits.find(:all,
-          :conditions => ["product = ? and created_at between ?", 
+          :conditions => ["product = ? and created_at between ? and ?", 
             @product.paypal_product_code,
             date_from.to_s(:db),
             date_to.to_s(:fb)])
