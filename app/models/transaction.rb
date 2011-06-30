@@ -63,7 +63,7 @@ class Transaction < ActiveRecord::Base
   end
   
   def parent_transaction
-    Transaction.find(self.parent_transaction_id)
+    Transaction.find_by_transaction_reference (self.parent_transaction_id)
   end
   
   def credit_transaction_type?
