@@ -18,6 +18,7 @@
 					<!-- <ListID>F230000-1196864585</ListID> -->
 					<FullName><%= full_name%></FullName> <!-- You can specify either ListID or FullName -->
 				</CustomerRef>
+				<TxnDate><%=today%></TxnDate>				
 				<% items.each do |item| %>
  				  <CreditMemoLineAdd>
    					<ItemRef>
