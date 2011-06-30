@@ -7,13 +7,13 @@ class ReportsController < ApplicationController
       date_to = Date.parse(params[:date_to].to_a.sort.collect{|c| c[1]}.join("-") )
       case params[:list_of]
       when 'invoice'
-      @transactions = Transaction.invoices.find(:all,
-        :conditions => ["product = ? and created_at between ? and ? and classification = ?", 
-          @product.paypal_product_code,
-          date_from.to_s(:db),
-          date_to.to_s(:fb)])
+        @transactions = Transaction.invoices.find(:all,
+          :conditions => ["product = ? and created_at between ? and ? and classification = ?", 
+            @product.paypal_product_code,
+            date_from.to_s(:db),
+            date_to.to_s(:fb)])
       when 'credit'
-        @transactions.credits.find(:all,
+        @transactions = Transaction.credits.find(:all,
           :conditions => ["product = ? and created_at between ? and ? and classification = ?", 
             @product.paypal_product_code,
             date_from.to_s(:db),
