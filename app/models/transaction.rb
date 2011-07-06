@@ -44,19 +44,28 @@ class Transaction < ActiveRecord::Base
   end
   
   def upload_to_quickbooks
+    @product = Product.find_by_paypal_product_code(self.product)
     case self.classification
     when 'invoice'
-      if self.paypal_account and self.paypal_account.devex_user and !self.paypal_account.devex_user.qb_member_name.blank?
+      if self.paypal_account and self.paypal_account.devex_user and (!self.paypal_account.devex_user.qb_member_name.blank? or !@product.batch_qb_name.blank?)
         items = [self.product]
-        full_name = self.paypal_account.devex_user.qb_member_name
+        if !@product.nil? and !@product.batch_qb_name.blank?
+          full_name = self.paypal_account.devex_user.qb_member_name
+        else
+          full_name = @product.batch_qb_name
+        end
         qb_message = Qboe.create_invoice(full_name, items)
         self.update_attributes(:uploaded_to_qb => true)
       end
     when 'credit'
-      if self.paypal_account and self.paypal_account.devex_user and !self.paypal_account.devex_user.qb_member_name.blank?
+      if self.paypal_account and self.paypal_account.devex_user and (!self.paypal_account.devex_user.qb_member_name.blank? or !@product.batch_qb_name.blank?)
         amount = self.amount
         items = [self.product]
-        full_name = self.paypal_account.devex_user.qb_member_name
+        if !@product.nil? and !@product.batch_qb_name.blank?
+          full_name = self.paypal_account.devex_user.qb_member_name
+        else
+          full_name = @product.batch_qb_name
+        end
         qb_message = Qboe.create_credit(full_name, amount, items)
         self.update_attributes(:uploaded_to_qb => true)
       end      
