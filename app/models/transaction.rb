@@ -54,7 +54,7 @@ class Transaction < ActiveRecord::Base
         else
           full_name = self.paypal_account.devex_user.qb_member_name
         end
-        qb_message = Qboe.create_invoice(full_name, items)
+        qb_message = Qboe.create_sales_receipt(full_name, items, self.paypal_account.devex_user)
         self.update_attributes(:uploaded_to_qb => true)
       end
     when 'credit'

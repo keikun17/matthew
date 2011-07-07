@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?qbxml version="2.0"?>
+<QBXML>
+  <SignonMsgsRq>
+		<SignonTicketRq> 
+			<ClientDateTime><%=today%></ClientDateTime> 
+			<SessionTicket><%=session%></SessionTicket>
+			<Language>English</Language> 
+			<AppID><%= QB_APP_ID %></AppID>
+			<AppVer>1</AppVer> 
+		</SignonTicketRq> 
+	</SignonMsgsRq>
+	<QBXMLMsgsRq onError="stopOnError">
+		<SalesReceiptAddRq requestID="2">
+			<SalesReceiptAdd>
+				<CustomerRef>
+					<!-- <ListID>3</ListID> -->
+					<FullName><%= full_name %></FullName>
+				</CustomerRef>
+				<TxnDate><%=today%></TxnDate>
+				<Memo>Test</Memo>
+        <% items.each do |item| %>
+  				<SalesReceiptLineAdd>
+  					<ItemRef>
+  						<FullName><%=item%></FullName>
+  					</ItemRef>
+  					<Desc>Payment for Devex user : <%= devex_username %></Desc>
+  					<Quantity>1</Quantity>
+  				</SalesReceiptLineAdd>
+			  <%end%>
+			</SalesReceiptAdd>
+		</SalesReceiptAddRq>
+	</QBXMLMsgsRq>
+</QBXML>

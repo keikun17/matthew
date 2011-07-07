@@ -21,7 +21,7 @@ class Qboe
       result["QBXML"]["QBXMLMsgsRs"]["CustomerQueryRs"]["CustomerRet"]["ListID"]
   end
   
-  def self.create_invoice(customer_name,items)
+  def self.create_invoice(customer_name, items)
       today = Time.now.strftime("%Y-%m-%d")
       customer_id = find_customer_id(customer_name)            
       full_name = customer_name
@@ -37,6 +37,21 @@ class Qboe
       amount = params["Subtotal"]
       create_payment(full_name, txn_id, amount)
   end
+  
+  def self.create_sales_receipt(customer_name, items, devex_username)
+      today = Time.now.strftime("%Y-%m-%d")
+      customer_id = find_customer_id(customer_name)            
+      full_name = customer_name
+      session = self.getSession
+      xml_to_send = ERB.new(get_file_as_string("lib/qb_integration/invoice.erb")).result(binding) 
+      result = post('/', :body => xml_to_send )
+      puts "result : " + result.inspect
+      Rails.logger.info result
+      params = result["QBXML"]["QBXMLMsgsRs"]["InvoiceAddRs"]["InvoiceRet"]
+      Rails.logger.info "---- InvoiceRet ---"
+      Rails.logger.info params
+  end
+    
   
   def self.create_credit(customer_name, amount, items)
     today = Time.now.strftime("%Y-%m-%d")
