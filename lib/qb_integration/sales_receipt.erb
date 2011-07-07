@@ -11,7 +11,7 @@
 		</SignonTicketRq> 
 	</SignonMsgsRq>
 	<QBXMLMsgsRq onError="stopOnError">
-		<SalesReceiptAddRq requestID="2">
+		<SalesReceiptAddRq>
 			<SalesReceiptAdd>
 				<CustomerRef>
 					<!-- <ListID>3</ListID> -->
@@ -24,7 +24,6 @@
   					<ItemRef>
   						<FullName><%=item%></FullName>
   					</ItemRef>
-  					<Desc>Payment for Devex user : <%= devex_username %></Desc>
   					<Quantity>1</Quantity>
   				</SalesReceiptLineAdd>
 			  <%end%>
