@@ -47,9 +47,6 @@ class Qboe
       result = post('/', :body => xml_to_send )
       puts "result : " + result.inspect
       Rails.logger.info result
-      params = result["QBXML"]["QBXMLMsgsRs"]
-      Rails.logger.info "---- QBXMLMsgsRs ---"
-      Rails.logger.info params
   end
     
   
