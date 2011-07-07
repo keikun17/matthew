@@ -43,7 +43,7 @@ class Qboe
       customer_id = find_customer_id(customer_name)            
       full_name = customer_name
       session = self.getSession
-      xml_to_send = ERB.new(get_file_as_string("lib/qb_integration/invoice.erb")).result(binding) 
+      xml_to_send = ERB.new(get_file_as_string("lib/qb_integration/sales_receipt.erb")).result(binding) 
       result = post('/', :body => xml_to_send )
       puts "result : " + result.inspect
       Rails.logger.info result
