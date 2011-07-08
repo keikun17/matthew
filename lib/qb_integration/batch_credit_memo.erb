@@ -23,7 +23,7 @@
    					<ItemRef>
    						<FullName><%= receipt_line.product %></FullName>
    					</ItemRef>
-   					<Quantity><%= receipt_line.count %></Quantity>
+   					<Desc><%= receipt_line.count %> <%= receipt_line.product %> refunds</Desc>
    					<Amount><%= receipt_lines.amount %></Amount>
    				</CreditMemoLineAdd>
  			  <%end%>
