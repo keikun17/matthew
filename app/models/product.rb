@@ -4,4 +4,5 @@ class Product < ActiveRecord::Base
   def transactions
     Transaction.find(:all, :conditions => "product = '#{self.paypal_product_code}'")
   end
+
 end

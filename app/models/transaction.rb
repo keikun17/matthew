@@ -16,6 +16,7 @@ class Transaction < ActiveRecord::Base
   scope :uploadable, :conditions => ["uploaded_to_qb is null or uploaded_to_qb = ?", false]
   scope :invoices, :conditions => {:classification => 'invoice'}
   scope :credits, :conditions => {:classification => 'credit'}
+  scope :for_next_bulk_update, :conditions => {:for_next_bulk_update => true}
   def ipn_account_email 
     self.payer_email
   end
@@ -43,6 +44,10 @@ class Transaction < ActiveRecord::Base
     end 
   end
   
+  def bulk_upload_to_quickbooks(classification)
+    Qboe.upload_batch_sales_receipt(classification)
+  end
+  
   def upload_to_quickbooks
     @product = Product.find_by_paypal_product_code(self.product)
     case self.classification
@@ -51,11 +56,12 @@ class Transaction < ActiveRecord::Base
         items = [self.product]
         if !@product.nil? and !@product.batch_qb_name.blank?
           full_name = @product.batch_qb_name
+          self.update_attribute(:for_next_bulk_update, true)
         else
           full_name = self.paypal_account.devex_user.qb_member_name
+          qb_message = Qboe.create_sales_receipt(full_name, items, self.paypal_account.devex_user.username)
+          self.update_attributes(:uploaded_to_qb => true)
         end
-        qb_message = Qboe.create_sales_receipt(full_name, items, self.paypal_account.devex_user.username)
-        self.update_attributes(:uploaded_to_qb => true)
       end
     when 'credit'
       if self.paypal_account and self.paypal_account.devex_user and (!self.paypal_account.devex_user.qb_member_name.blank? or !@product.batch_qb_name.blank?)
@@ -63,11 +69,12 @@ class Transaction < ActiveRecord::Base
         items = [self.product]
         if !@product.nil? and !@product.batch_qb_name.blank?
           full_name = @product.batch_qb_name
+          self.update_attribute(:for_next_bulk_update, true)
         else  
           full_name = self.paypal_account.devex_user.qb_member_name
+          qb_message = Qboe.create_credit(full_name, amount, items)
+          self.update_attributes(:uploaded_to_qb => true)
         end
-        qb_message = Qboe.create_credit(full_name, amount, items)
-        self.update_attributes(:uploaded_to_qb => true)
       end      
     end
   end

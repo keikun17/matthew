@@ -14,18 +14,16 @@
 		<SalesReceiptAddRq>
 			<SalesReceiptAdd>
 				<CustomerRef>
-					<!-- <ListID>3</ListID> -->
-					<FullName><%= full_name %></FullName>
+					<FullName><%= batch_qb_member_name %></FullName>
 				</CustomerRef>
 				<TxnDate><%=today%></TxnDate>
 				<Memo>Test</Memo>
-        <% receipt_lines.each do |receipt_line| %>
+        <% transactions.each do |transaction| %>
   				<SalesReceiptLineAdd>
   					<ItemRef>
-  						<FullName><%= receipt_line[:product] %></FullName>
+  						<FullName><%=transaction.product%></FullName>
   					</ItemRef>
-  					<Desc><%= receipt_line[:product] %></Desc>
-  					<Quantity><%= receipt_line[:count] %></Quantity>
+  					<Quantity>1</Quantity>
   				</SalesReceiptLineAdd>
 			  <%end%>
 			</SalesReceiptAdd>

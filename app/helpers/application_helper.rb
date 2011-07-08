@@ -22,4 +22,13 @@ module ApplicationHelper
   def uploadable_transactions_count
     link_to(Transaction.uploadable.count.to_s + " Transactions", '#',:class => "cool-link-red") 
   end
+  
+  def invoices_for_next_batch_update
+    link_to(Transaction.invoices.for_next_bulk_update.count.to_s + "Sales Receipts", bulk_upload_to_quickbooks_path(:classification => "invoice"), :class => "cool-link-red") 
+  end
+  
+  def credit_memos_for_next_batch_update
+    link_to(Transaction.credits.for_next_bulk_update.count.to_s + " Credit Memos", bulk_upload_to_quickbooks_path(:classification => "credit"), :class => "cool-link-red") 
+  end
+  
 end
