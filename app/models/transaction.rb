@@ -44,9 +44,14 @@ class Transaction < ActiveRecord::Base
     end 
   end
   
-  def bulk_upload_to_quickbooks(classification)
-    Qboe.upload_batch_sales_receipt(classification)
+  def upload_batch_sales_receipt
+    Qboe.upload_batch_sales_receipt
   end
+  
+  def upload_batch_credit_memo
+    Qboe.upload_batch_credit_memo
+  end
+
   
   def upload_to_quickbooks
     @product = Product.find_by_paypal_product_code(self.product)

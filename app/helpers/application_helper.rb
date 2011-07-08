@@ -24,7 +24,7 @@ module ApplicationHelper
   end
   
   def invoices_for_next_batch_update
-    link_to(Transaction.invoices.for_next_bulk_update.count.to_s + "Sales Receipts", bulk_upload_sales_receipts_to_quickbooks_path(:classification => "invoice"), :class => "cool-link-red") 
+    link_to(Transaction.invoices.for_next_bulk_update.count.to_s + " Sales Receipts", bulk_upload_sales_receipts_to_quickbooks_path(:classification => "invoice"), :class => "cool-link-red") 
   end
   
   def credit_memos_for_next_batch_update
