@@ -107,14 +107,14 @@ class TransactionsController < ApplicationController
   def bulk_upload_sales_receipts_to_quickbooks
     count = Transaction.invoices.for_next_bulk_update.count
     Transaction.upload_batch_sales_receipt
-    flash[:notice] => "#{count} Transactions have been uploaded by bulk"
+    flash[:notice] = "#{count} Transactions have been uploaded by bulk"
     redirect_to request.referer
   end
   
   def bulk_upload_credit_memos_to_quickbooks
     count = Transaction.credits.for_next_bulk_update.count
     Transaction.upload_batch_credit_memo
-    flash[:notice] => "#{count} Transactions have been uploaded by bulk"
+    flash[:notice] = "#{count} Transactions have been uploaded by bulk"
     redirect_to request.referer
   end  
   
