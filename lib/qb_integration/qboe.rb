@@ -71,7 +71,27 @@ class Qboe
   
   # TODO
   def self.upload_batch_credit_memo
+    batch_qb_member_name = QB_BATCH_NAME
 
+    # get receipt_lines
+    receipt_lines = Transaction.unscoped.find(:all, :select => "distinct product, count(product) as count", :conditions => {:classification => 'credit', :for_next_bulk_update => true}, :group => "product").map{|x| {
+      :count => x.count,
+      :product => x.product,
+      :amount => Transaction.credits.for_next_bulk_update.sum(:amount, :conditions => {:product => x.product})
+      }}
+    today = Time.now.strftime("%Y-%m-%d")
+    session = self.getSession
+
+    xml_to_send = ERB.new(get_file_as_string("lib/qb_integration/batch_credit_memo.erb")).result(binding) 
+    result = post('/', :body => xml_to_send )
+    puts "result : " + result.inspect
+    Rails.logger.info result
+    
+    #Mark as uploaded
+    Transaction.credits.for_next_bulk_update.each do |transaction|
+      transaction.update_attribute(:for_next_bulk_update, false)
+      transaction.update_attribute(:uploaded_to_qb, true)
+    end
   end  
   
   def self.create_credit(customer_name, amount, items)
