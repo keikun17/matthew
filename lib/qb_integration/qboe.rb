@@ -88,7 +88,7 @@ class Qboe
     Rails.logger.info result
     
     #Mark as uploaded
-    unless result.inspect["QBXML"]["QBXMLMsgsRs"]["CreditMemoAddRs"]["statusSeverity"]
+    unless result.inspect["QBXML"]["QBXMLMsgsRs"]["CreditMemoAddRs"]["statusSeverity"].eql?("Error")
       Transaction.credits.for_next_bulk_update.each do |transaction|
         transaction.update_attribute(:for_next_bulk_update, false)
         transaction.update_attribute(:uploaded_to_qb, true)
