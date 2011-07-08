@@ -77,7 +77,7 @@ class Qboe
     receipt_lines = Transaction.unscoped.find(:all, :select => "distinct product, count(product) as count", :conditions => {:classification => 'credit', :for_next_bulk_update => true}, :group => "product").map{|x| {
       :count => x.count,
       :product => x.product,
-      :amount => Transaction.credits.for_next_bulk_update.sum(:amount, :conditions => {:product => x.product}).abs
+      :amount => Transaction.credits.for_next_bulk_update.sum(:amount, :conditions => {:product => x.product}).abs.to_s
       }}
     today = Time.now.strftime("%Y-%m-%d")
     session = self.getSession
@@ -96,7 +96,7 @@ class Qboe
   
   def self.create_credit(customer_name, amount, items)
     today = Time.now.strftime("%Y-%m-%d")
-    amount = amount.abs
+    amount = [amount].abs
     customer_id = find_customer_id(customer_name)
     full_name = customer_name
     session = self.getSession
