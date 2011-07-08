@@ -19,13 +19,13 @@
 				</CustomerRef>
 				<TxnDate><%=today%></TxnDate>
 				<Memo>Test</Memo>
-        <% receipt_lines.each do |receipt_line| %>
+        <% items.each do |item| %>
   				<SalesReceiptLineAdd>
   					<ItemRef>
-  						<FullName><%= receipt_line[:product] %></FullName>
+  						<FullName><%=item%></FullName>
   					</ItemRef>
-  					<Desc><%= receipt_line[:product] %></Desc>
-  					<Quantity><%= receipt_line[:count] %></Quantity>
+  					<Desc>Payment for Devex user : <%= devex_username %></Desc>
+  					<Quantity>1</Quantity>
   				</SalesReceiptLineAdd>
 			  <%end%>
 			</SalesReceiptAdd>
