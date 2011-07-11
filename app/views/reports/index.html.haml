@@ -22,15 +22,17 @@
     %legend Filter
     - form_tag do 
       I want a list of 
-      = select_tag "list_of", options_for_select([["Sales Revenues", "invoice"], ["Credit Memos", "credit"]])
+      = select_tag "list_of", options_for_select([["Sales Revenues", "invoice"], ["Credit Memos", "credit"]], params[:list_of])
       %br
       From
-      = date_select "date_from", ""
+      =# date_select "date_from", ""
+      = calendar_date_select_tag "date_from", @date_from, :popup => "force"
       To
-      = date_select "date_to", ""
+      =# date_select "date_to", ""
+      = calendar_date_select_tag "date_to", @date_to, :popup => "force"
       %br
       For the Product
-      = select_tag "product", options_for_select(Product.all.map{|x| [x.name, x.id]})
+      = select_tag "product", options_for_select(Product.all.map{|x| [x.name, x.id]}, params[:product])
       %br    
       = submit_tag "Filter"
 

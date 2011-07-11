@@ -10,8 +10,9 @@
     = stylesheet_link_tag 'style.css', :media => 'style'
     = stylesheet_link_tag 'formtastic', 'formtastic_changes'
     /[if IE]
-      = stylesheet_link_tag 'ie.css', :media => 'screen, projection'  
-
+      = stylesheet_link_tag 'ie.css', :media => 'screen, projection'
+    = calendar_date_select_includes
+    = yield :head
   %body.two-columns
     #container
       #header

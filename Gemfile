@@ -39,6 +39,7 @@ gem 'formtastic'
 gem 'will_paginate'
 gem 'pg'
 gem 'httparty'
+gem 'calendar_date_select', :git => 'http://github.com/paneq/calendar_date_select.git'
 
 group :test do
   gem 'cucumber-rails'
