@@ -60,7 +60,7 @@ class Qboe
       xml_to_send = ERB.new(get_file_as_string("lib/qb_integration/batch_sales_receipt.erb")).result(binding) 
       result = post('/', :body => xml_to_send )
       puts "result : " + result.inspect
-      Rails.logger "UPLOAD BATCH SALES RECEIPT"
+      Rails.logger.info "UPLOAD BATCH SALES RECEIPT"
       Rails.logger.info result
 
       #Mark as uploaded
@@ -86,7 +86,7 @@ class Qboe
     xml_to_send = ERB.new(get_file_as_string("lib/qb_integration/batch_credit_memo.erb")).result(binding) 
     result = post('/', :body => xml_to_send )
     puts "result : " + result.inspect
-    Rails.logger "UPLOAD BATCH CREDIT MEMO"
+    Rails.logger.info "UPLOAD BATCH CREDIT MEM"
     Rails.logger.info result
     
     #Mark as uploaded
