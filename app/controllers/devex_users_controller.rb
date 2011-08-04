@@ -62,7 +62,7 @@ class DevexUsersController < ApplicationController
         @devex_user.transactions.uploadable.each do |transaction|
           transaction.upload_to_quickbooks
         end
-        format.html { redirect_to(mapping_path, :notice => 'Devex user was successfully updated.') }
+        format.html { redirect_to(mappings_path, :notice => 'Devex user was successfully updated.') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

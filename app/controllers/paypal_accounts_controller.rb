@@ -94,4 +94,5 @@ class PaypalAccountsController < ApplicationController
     @consultants = Consultant.all
     @paypal_account = PaypalAccount.find(params[:id])
   end
+    
 end

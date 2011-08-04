@@ -291,7 +291,7 @@ table.table2 {
 }
 /* line 79, ../../app/stylesheets/style.scss */
 .two-columns #content-inner {
-  border: 1px solid black;
+  /*		border:1px solid black;*/
   text-align: left;
   min-height: 550px;
   padding: 10px;

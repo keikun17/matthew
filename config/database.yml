@@ -21,5 +21,46 @@ production:
   database: matthew_production
   username: ubuntu
 
+# DEVEX
+
+neo_development:
+  adapter: sqlite3
+  database: db/neo_development.sqlite3
+  pool: 5
+  timeout: 5000
+
+neo_production:
+  adapter: postgresql
+  host: localhost
+  database: neo_production
+  username: ubuntu
+  
+neo_test:
+  adapter: sqlite3
+  database: db/neo_test.sqlite3
+  pool: 5
+  timeout: 5000
+
+# DFA
+
+dfa_development:
+  adapter: sqlite3
+  database: db/dfa_development.sqlite3
+  pool: 5
+  timeout: 5000
+
+dfa_production:
+  adapter: postgresql
+  host: localhost
+  database: dfa_production
+  username: ubuntu
+
+dfa_test:
+  adapter: sqlite3
+  database: db/dfa_test.sqlite3
+  pool: 5
+  timeout: 5000
+
+
 cucumber:
   <<: *test

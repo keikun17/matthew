@@ -77,7 +77,7 @@ $blueprint_grid_width: 40px;
     @include column(20, true);
 		background-color: $content-bg-color;}
 	#content-inner{
-		border:1px solid black;
+/*		border:1px solid black;*/
 		text-align:left;
 		min-height: 550px;
 		padding:10px;

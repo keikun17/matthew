@@ -23,3 +23,6 @@ end
 QB_APP_LOGIN = "matthew.matthew.devex.com"
 QB_CONNECTION_TICKET = "TGT-63-k9LFQUnw8AkcYiSNKHus_Q"
 QB_APP_ID = "209654516"
+
+DEVEX_DB = "neo_#{RAILS_ENV.downcase}".to_sym
+DFA_DB = "dfa_#{RAILS_ENV.downcase}".to_sym

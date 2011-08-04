@@ -1,0 +1,14 @@
+- if search_results.length == 0
+  Sorry! no users found...
+- elsif params[:query] == ""
+  You must enter a search term.
+- else
+  %tbody
+    - for user in search_results
+      %tr
+        %th{:scope => "row"}= user.username
+        %td= user.consultant.service_level_id
+        %td
+        %td
+        %td= link_to "Connect", mapping_do_map_path(:consultant_id => user.consultant.id, :paypal_account_id => params[:paypal_account_id]), :class => "awesome blue"
+        
