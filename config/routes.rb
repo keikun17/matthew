@@ -32,7 +32,7 @@ Matthew::Application.routes.draw do
     end
   end
 
-  match '/mapping/do_map' => 'mappings#do_map'
+  match '/mappings/do_map' => 'mappings#do_map'
   match '/bulk_upload_sales_receipts_to_quickbooks' => 'transactions#bulk_upload_sales_receipts_to_quickbooks'
   match '/bulk_upload_credit_memos_to_quickbooks' => 'transactions#bulk_upload_credit_memos_to_quickbooks'  
   # The priority is based upon order of creation:
