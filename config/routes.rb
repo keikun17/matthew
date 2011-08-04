@@ -24,6 +24,7 @@ Matthew::Application.routes.draw do
     end
   end
   match '/ipn' => 'paypal#ipn'
+  match '/mappings/do_map' => 'mappings#do_map'
   resources :mappings
   resources :reports
   resources :users do 
@@ -32,7 +33,7 @@ Matthew::Application.routes.draw do
     end
   end
 
-  match '/mappings/do_map' => 'mappings#do_map'
+
   match '/bulk_upload_sales_receipts_to_quickbooks' => 'transactions#bulk_upload_sales_receipts_to_quickbooks'
   match '/bulk_upload_credit_memos_to_quickbooks' => 'transactions#bulk_upload_credit_memos_to_quickbooks'  
   # The priority is based upon order of creation:
