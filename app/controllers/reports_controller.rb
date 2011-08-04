@@ -21,7 +21,7 @@ class ReportsController < ApplicationController
             @date_to.to_date.to_s(:db)])
       end
     else        
-      @transactions = Transaction.all
+      @transactions = Transaction.paginate(:all, :page => params[:page], :per_page => params[:per_page] )
     end
   end
 end

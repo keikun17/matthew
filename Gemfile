@@ -36,7 +36,7 @@ gem 'rack-test'
 gem 'haml'
 gem "compass", ">= 0.11.1"
 gem 'formtastic'
-gem 'will_paginate'
+gem 'will_paginate', '3.0.pre2'
 gem 'pg'
 gem 'httparty'
 gem 'calendar_date_select', :git => 'http://github.com/paneq/calendar_date_select.git'
