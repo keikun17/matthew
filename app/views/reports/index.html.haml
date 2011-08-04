@@ -52,7 +52,8 @@
 USD
   
 %br
-= will_paginate @transactions
+  %center
+    = will_paginate @transactions
 %table
   %thead
     %tr
@@ -77,5 +78,6 @@ USD
         %td{:style => "font-weight:bold;color:#{transaction.classification.eql?('credit') ? 'red' : 'green'}"}= transaction.amount.to_s + " USD" unless transaction.amount.blank?
         %td= transaction.created_at
         %td= link_to transaction.uploaded_to_qb?.to_s, upload_to_qb_transaction_path(transaction)
-= will_paginate @transactions
-= page_entries_info @transactions      
+%center
+  = will_paginate @transactions
+  = page_entries_info @transactions      
