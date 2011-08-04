@@ -4,9 +4,8 @@
 #content-options
   #content-buttons
     =link_to "Link Incoming Paypal Accounts", orphans_paypal_accounts_path, :class => "awesome orange"  
-  #content-search
-    =text_field_tag "Search", "Search...", :size => 30
 
+= will_paginate @devex_users
 %table.table2
   %thead
     %tr
@@ -29,3 +28,6 @@
         - else
           %td= link_to devex_user.qb_member_name, edit_devex_user_path(devex_user), :class => "cool-link-red"
         %td= link_to devex_user.transactions.count, devex_user_transactions_path(devex_user)
+  = will_paginate @devex_users
+  = page_entries_info @devex_users
+  

@@ -18,6 +18,10 @@ class Transaction < ActiveRecord::Base
   scope :credits, :conditions => {:classification => 'credit'}
   scope :for_next_bulk_update, :conditions => {:for_next_bulk_update => true}
   scope :not_for_next_bulk_update, :conditions => {:for_next_bulk_update => false}
+
+  cattr_reader :per_page
+  @@per_page = 20
+  
   def ipn_account_email 
     self.payer_email
   end
