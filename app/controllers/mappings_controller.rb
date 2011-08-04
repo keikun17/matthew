@@ -15,7 +15,7 @@ class MappingsController < ApplicationController
       if @devex_user.save
         if @paypal_account.update_attributes(:devex_user_id => @devex_user.id)
           flash[:notice] = "Paypal User #{@paypal_account.email} has been succesfully mapped to Devex User #{@devex_user.username}"
-          redirect_to '/mappincgs'
+          redirect_to '/mappings'
         end
       end
     else
