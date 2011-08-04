@@ -1,3 +1,3 @@
 class Company < ActiveRecord::Base
-  establish_connection DEVEX_DB
+  establish_connection Rails::Application.config.devex_db
 end

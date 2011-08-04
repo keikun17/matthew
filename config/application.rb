@@ -37,5 +37,8 @@ module Matthew
     config.autoload_paths += %W(#{config.root}/lib/qb_integration)
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
+    
+    config.devex_db = "neo_#{RAILS_ENV.downcase}".to_sym
+    config.dfa_db   = "dfa_#{RAILS_ENV.downcase}".to_sym
   end
 end
