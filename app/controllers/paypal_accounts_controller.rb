@@ -91,7 +91,7 @@ class PaypalAccountsController < ApplicationController
   end
   
   def map
-    @consultants = Consultant.all
+    @consultants = []
     @paypal_account = PaypalAccount.find(params[:id])
   end
     
