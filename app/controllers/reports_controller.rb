@@ -8,20 +8,15 @@ class ReportsController < ApplicationController
       @date_to = params[:date_to] #Date.parse(params[:date_to].to_a.sort.collect{|c| c[1]}.join("-") )
       case params[:list_of]
       when 'invoice'
-        @transactions = Transaction.invoices.find(:all,
-          :conditions => ["product = ? and created_at between ? and ?", 
-            @product.paypal_product_code,
-            @date_from.to_date.to_s(:db),
-            @date_to.to_date.to_s(:db)])
+        @transactions = Transaction.invoices.page(params[:page]).where(:product => @product.paypal_product_code, :created_at => db_date(@date_from)..db_date(@date_to))
+        @total = Transaction.invoices.where(:product => @product.paypal_product_code, :created_at => db_date(@date_from)..db_date(@date_to)).sum(:amount)
       when 'credit'
-         @transactions = Transaction.credits.find(:all,
-           :conditions => ["product = ? and created_at between ? and ?", 
-            @product.paypal_product_code,
-            @date_from.to_date.to_s(:db),
-            @date_to.to_date.to_s(:db)])
+        @transactions = Transaction.credits.page(params[:page]).where(:product => @product.paypal_product_code, :created_at => db_date(@date_from)..db_date(@date_to))
+        @total = Transaction.credits.where(:product => @product.paypal_product_code, :created_at => db_date(@date_from)..db_date(@date_to)).sum(:amount)
       end
     else        
-      @transactions = Transaction.paginate(:all, :page => params[:page], :per_page => params[:per_page] )
+      @transactions = Transaction.page(params[:page])
+      @total = Transaction.sum(:amount)
     end
   end
 end

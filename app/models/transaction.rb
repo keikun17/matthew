@@ -19,8 +19,7 @@ class Transaction < ActiveRecord::Base
   scope :for_next_bulk_update, :conditions => {:for_next_bulk_update => true}
   scope :not_for_next_bulk_update, :conditions => {:for_next_bulk_update => false}
 
-  cattr_reader :per_page
-  @@per_page = 20
+  self.per_page = 20
   
   def ipn_account_email 
     self.payer_email
