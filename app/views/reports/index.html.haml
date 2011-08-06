@@ -20,7 +20,7 @@
 #content-options
   %fieldset
     %legend Filter
-    - form_tag do 
+    = form_tag(reports_path, :method => 'get') do 
       I want a list of 
       = select_tag "list_of", options_for_select([["Sales Revenues", "invoice"], ["Credit Memos", "credit"]], params[:list_of])
       %br
