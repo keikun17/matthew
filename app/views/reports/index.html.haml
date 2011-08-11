@@ -32,7 +32,7 @@
       = calendar_date_select_tag "date_to", @date_to, :popup => "force"
       %br
       For the Product
-      = select_tag "product", options_for_select(Product.all.map{|x| [x.name, x.id]} + ['ALL','ALL'], params[:product])
+      = select_tag "product", options_for_select(Product.all.map{|x| [x.name, x.id]} + ['ALL'], params[:product])
       %br    
       = submit_tag "Filter"
 
