@@ -32,15 +32,15 @@
       = calendar_date_select_tag "date_to", @date_to, :popup => "force"
       %br
       For the Product
-      = select_tag "product", options_for_select(Product.all.map{|x| [x.name, x.id]}, params[:product])
+      = select_tag "product", options_for_select(Product.all.map{|x| [x.name, x.id]} + ['ALL','ALL'], params[:product])
       %br    
       = submit_tag "Filter"
 
     
   
   Export to 
-  = link_to "Excel", export_reports_path(:date_from => @date_from, :date_to => @date_to), :class => "awesome blue small"
-  = link_to "PDF","#", :class => "awesome green small"
+  = link_to "Excel", export_reports_path(:date_from => @date_from, :date_to => @date_to, :product => params[:product]), :class => "awesome blue small"
+  =# link_to "PDF","#", :class => "awesome green small"
 %div{:style => "clear:both"}
 
 - if params[:list_of] == 'credit'
