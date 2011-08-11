@@ -39,7 +39,7 @@
     
   
   Export to 
-  = link_to "Excel", export_reports_path(:date_from => @date_from, :date_to => @date_to, :product => params[:product]), :class => "awesome blue small"
+  = link_to "Excel", export_reports_path(:date_from => @date_from, :date_to => @date_to, :product => params[:product], :list_of => params[:list_of]), :class => "awesome blue small"
   =# link_to "PDF","#", :class => "awesome green small"
 %div{:style => "clear:both"}
 

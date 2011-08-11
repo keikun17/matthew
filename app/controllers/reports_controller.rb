@@ -6,8 +6,7 @@ class ReportsController < ApplicationController
       if params[:product] and params[:product] != "ALL"
          @product = Product.find params[:product]
        end
-
-       @transactions_arel = Transaction.where(:created_at => @date_from..@date_to)
+       @transactions_arel = Transaction.where(:created_at => db_date(@date_from)..db_date(@date_to))
 
        case params[:list_of]
        when 'invoice'
@@ -62,6 +61,7 @@ class ReportsController < ApplicationController
         transaction.payer_email,
         transaction.devex_user_full_name,
         transaction.product,
+        transaction.amount.to_s,
         transaction.created_at ]
     end
 
