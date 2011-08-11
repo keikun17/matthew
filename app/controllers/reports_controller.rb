@@ -75,6 +75,11 @@ class ReportsController < ApplicationController
     filepath = "#{RAILS_ROOT}/tmp/"
     filename = "test.xls"
     book.write(filepath + filename)
+    timeout = 500
+    counter = 0
+    until ((File.size(filepath + filename) > 0) or (counter > timeout))      
+      counter = counter + 5
+    end
     send_file(filepath + filename)
   end
 end
