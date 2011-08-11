@@ -77,7 +77,8 @@ class ReportsController < ApplicationController
     book.write(filepath + filename)
     timeout = 500
     counter = 0
-    until ((File.size(filepath + filename) > 0) or (counter > timeout))      
+    until ((File.size(filepath + filename) > 0) or (counter > timeout))
+      sleep(4)
       counter = counter + 5
     end
     send_file(filepath + filename)
