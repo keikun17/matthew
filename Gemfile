@@ -40,6 +40,7 @@ gem 'will_paginate', '3.0.pre4'
 gem 'pg'
 gem 'httparty'
 gem 'calendar_date_select', :git => 'http://github.com/paneq/calendar_date_select.git'
+gem 'spreadsheet'
 
 group :test do
   gem 'cucumber-rails'

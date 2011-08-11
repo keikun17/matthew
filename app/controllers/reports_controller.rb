@@ -19,4 +19,42 @@ class ReportsController < ApplicationController
       @total = Transaction.sum(:amount)
     end
   end
+  
+  def export
+    @date_from = db_date(params[:date_from])
+    @date_to = db_date(params[:date_to])
+    case params[:list_of]
+    when 'invoice'
+      @transactions = Transaction.invoices.page(params[:page]).where(:created_at => @date_from..@date_to).includes([:paypal_account => :devex_account])
+      @total = Transaction.invoices.where(:created_at => @date_from..@date_to).sum(:amount)
+    when 'credit'
+      @transactions = Transaction.credits.page(params[:page]).where(:created_at => @date_from..@date_to).includes([:paypal_account => :devex_account])
+      @total = Transaction.credits.where(:created_at => @date_from..@date_to).sum(:amount)
+    end
+    
+    book = Spreadsheet::Workbook.new
+    sheet1 = book.create_worksheet
+    sheet1.name = "#{params[:list_of]} : #{params[:date_from]} to #{params[:date_to]}"
+
+    sheet1.row(0).concat ['Paypal Transaction ID', 'Paypal Email', 'Devex Username', 'Product', 'Amount', 'Date']
+    @transactions.each do |transaction|
+      sheet1.row(@transactions.index_of(transaction) + 1).concat [transaction.transaction_reference, 
+        transaction.payer_email,
+        transaction.devex_user_full_name,
+        transaction.product,
+        transaction.created_at ]
+    end
+
+    format = Spreadsheet::Format.new :color => :blue,
+                                     :weight => :bold,
+                                     :size => 18
+
+    sheet1.row(0).default_format = format
+    bold = Spreadsheet::Format.new :weight => :bold
+    6.times do |x| sheet1.row(x + 1).set_format(0, bold) end
+    filepath = "#{RAILS_ROOT}/tmp/"
+    filename = "test.xls"
+    book.write(filepath + filename)
+    send_file(filepath + filename)
+  end
 end

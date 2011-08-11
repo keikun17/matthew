@@ -26,7 +26,11 @@ Matthew::Application.routes.draw do
   match '/ipn' => 'paypal#ipn'
   match '/mappings/do_map' => 'mappings#do_map'
   resources :mappings
-  resources :reports
+  resources :reports do
+    collection do 
+      get 'export'
+    end
+  end
   resources :users do 
     collection do 
       post 'find_users'

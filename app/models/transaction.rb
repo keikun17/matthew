@@ -8,7 +8,7 @@ class Transaction < ActiveRecord::Base
   before_validation :set_or_create_paypal_account
   validates_associated :paypal_account
   after_create :upload_to_quickbooks
-  
+  has_one :devex_user, :through => :paypal_account
   validates :ipn_data, :presence => true
   validates :transaction_reference, :presence => true
   validates :paypal_account_id, :presence => true
@@ -18,6 +18,8 @@ class Transaction < ActiveRecord::Base
   scope :credits, :conditions => {:classification => 'credit'}
   scope :for_next_bulk_update, :conditions => {:for_next_bulk_update => true}
   scope :not_for_next_bulk_update, :conditions => {:for_next_bulk_update => false}
+
+  delegate :full_name, :prefix => true, :to => :devex_user, :allow_nil => true
 
   self.per_page = 20
   
