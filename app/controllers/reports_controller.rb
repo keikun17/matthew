@@ -25,13 +25,13 @@ class ReportsController < ApplicationController
     @date_to = db_date(params[:date_to])
     case params[:list_of]
     when 'invoice'
-      @transactions = Transaction.invoices.page(params[:page]).where(:created_at => @date_from..@date_to).includes([:paypal_account => :devex_account])
+      @transactions = Transaction.invoices.where(:created_at => @date_from..@date_to).includes([{:paypal_account => :devex_user}])
       @total = Transaction.invoices.where(:created_at => @date_from..@date_to).sum(:amount)
     when 'credit'
-      @transactions = Transaction.credits.page(params[:page]).where(:created_at => @date_from..@date_to).includes([:paypal_account => :devex_account])
+      @transactions = Transaction.credits.where(:created_at => @date_from..@date_to).includes([{:paypal_account => :devex_user}])
       @total = Transaction.credits.where(:created_at => @date_from..@date_to).sum(:amount)
     else        
-      @transactions = Transaction.page(params[:page])
+      @transactions = Transaction.includes([{:paypal_account => :devex_user}])
       @total = Transaction.sum(:amount)
     end
     
