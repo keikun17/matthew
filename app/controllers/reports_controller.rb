@@ -31,7 +31,7 @@ class ReportsController < ApplicationController
       @transactions = Transaction.credits.where(:created_at => @date_from..@date_to).includes([{:paypal_account => :devex_user}])
       @total = Transaction.credits.where(:created_at => @date_from..@date_to).sum(:amount)
     else        
-      @transactions = Transaction.includes([{:paypal_account => :devex_user}])
+      @transactions = Transaction.where(:created_at => @date_from..@date_to).includes([{:paypal_account => :devex_user}])
       @total = Transaction.sum(:amount)
     end
     
