@@ -30,6 +30,9 @@ class ReportsController < ApplicationController
     when 'credit'
       @transactions = Transaction.credits.page(params[:page]).where(:created_at => @date_from..@date_to).includes([:paypal_account => :devex_account])
       @total = Transaction.credits.where(:created_at => @date_from..@date_to).sum(:amount)
+    else        
+      @transactions = Transaction.page(params[:page])
+      @total = Transaction.sum(:amount)
     end
     
     book = Spreadsheet::Workbook.new
