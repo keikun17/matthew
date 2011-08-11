@@ -1,6 +1,6 @@
 class MappingsController < ApplicationController
   def index
-    @devex_users = DevexUser.paginate :all, :page => params[:page], :order => 'created_at DESC'
+    @devex_users = DevexUser.page(params[:page]).order('created_at DESC')
   end
   
   def do_map
