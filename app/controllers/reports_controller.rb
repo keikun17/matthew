@@ -41,7 +41,7 @@ class ReportsController < ApplicationController
 
     sheet1.row(0).concat ['Paypal Transaction ID', 'Paypal Email', 'Devex Username', 'Product', 'Amount', 'Date']
     @transactions.each do |transaction|
-      sheet1.row(@transactions.index_of(transaction) + 1).concat [transaction.transaction_reference, 
+      sheet1.row(@transactions.index(transaction) + 1).concat [transaction.transaction_reference, 
         transaction.payer_email,
         transaction.devex_user_full_name,
         transaction.product,
