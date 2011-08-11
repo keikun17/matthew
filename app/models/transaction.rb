@@ -4,7 +4,7 @@ class Transaction < ActiveRecord::Base
   
   serialize :ipn_data, Hash
   belongs_to :paypal_account
-  belongs_to :devex_user, :through => :paypal_account
+  has_one :devex_user, :through => :paypal_account
   before_validation :set_classification
   before_validation :set_or_create_paypal_account
   validates_associated :paypal_account
