@@ -11,7 +11,7 @@ class Transaction < ActiveRecord::Base
   after_create :upload_to_quickbooks
 
   validates :ipn_data, :presence => true
-  validates :transaction_reference, :presence => true
+  validates :transaction_reference, :presence => true, :uniqueness => true
   validates :paypal_account_id, :presence => true
   default_scope :order => "created_at desc"
   scope :uploadable, :conditions => ["(uploaded_to_qb is null or uploaded_to_qb = ?) and for_next_bulk_update = ?", false, false]
