@@ -43,7 +43,7 @@ class PaypalController < ApplicationController
     # instant: This payment was funded with PayPal balance, credit card, or Instant Transfer.
     @transaction.payment_type = params[:payment_type]
   
-    @transaction.custom = params[:custom]
+    @transaction.custom = params[:custom] unless params[:custom].blank?
     @transaction.product = params[:item_name]
     if @transaction.save and notify.acknowledge
       
