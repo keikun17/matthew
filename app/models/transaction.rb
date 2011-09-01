@@ -30,12 +30,14 @@ class Transaction < ActiveRecord::Base
   end
   
   def set_classification
-    if credit_transaction_type? or self.amount < 0
-      self.classification = 'credit'
-      self.parent_transaction_id = self[:ipn_data]["parent_txn_id"]
-      self.product = self.parent_transaction.product unless self.parent_transaction.nil?
-    else
-      self.classification = 'invoice'
+    unless self.amount.nil?
+      if credit_transaction_type? or self.amount < 0
+        self.classification = 'credit'
+        self.parent_transaction_id = self[:ipn_data]["parent_txn_id"]
+        self.product = self.parent_transaction.product unless self.parent_transaction.nil?
+      else
+        self.classification = 'invoice'
+      end
     end
   end  
   
