@@ -17,6 +17,7 @@ class Transaction < ActiveRecord::Base
   scope :uploadable, :conditions => ["(uploaded_to_qb is null or uploaded_to_qb = ?) and for_next_bulk_update = ?", false, false]
   scope :invoices, :conditions => {:classification => 'invoice'}
   scope :credits, :conditions => {:classification => 'credit'}
+  
   scope :for_next_bulk_update, :conditions => {:for_next_bulk_update => true}
   scope :not_for_next_bulk_update, :conditions => {:for_next_bulk_update => false}
 
@@ -29,7 +30,7 @@ class Transaction < ActiveRecord::Base
   end
   
   def set_classification
-    if credit_transaction_type?
+    if credit_transaction_type? or self.amount < 0
       self.classification = 'credit'
       self.parent_transaction_id = self[:ipn_data]["parent_txn_id"]
       self.product = self.parent_transaction.product unless self.parent_transaction.nil?
