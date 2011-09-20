@@ -13,7 +13,7 @@ class PaypalAccount < ActiveRecord::Base
   
   def automap_devex_account
     user = User.find_by_username(self.email)
-    if !user.nil?
+    if !user.nil? and !user.consultant.nil?
       devex_user = DevexUser.new(:account_id => user.consultant.id,
         :username => user.username,
         :account_type => "Consultant",
