@@ -16,7 +16,7 @@ class PaypalAccountsController < ApplicationController
   end
   
   def orphans
-    @paypal_accounts = PaypalAccount.find(:all, :conditions => "devex_user_id is null")
+    @paypal_accounts = PaypalAccount.page(params[:page]).where("devex_user_id is null")
   end
 
   # GET /paypal_accounts/1

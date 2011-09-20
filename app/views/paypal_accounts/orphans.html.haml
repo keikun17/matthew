@@ -7,6 +7,9 @@
   #content-search
     =text_field_tag "Search", "Search...", :size => 30
 
+%br
+  %center
+    = will_paginate @paypal_accounts
 %table.table2
   %thead
     %tr
@@ -21,4 +24,7 @@
         %td= [paypal_account.first_name, paypal_account.last_name].join(" ")
         %td= link_to "#{paypal_account.transactions.count}", "#", :style => "text-decoration:none"
         %td= link_to "Link to Devex Account", map_paypal_account_path(paypal_account)
-      
+%br
+  %center
+    = will_paginate @paypal_accounts        
+    = page_entries_info @paypal_accounts           
