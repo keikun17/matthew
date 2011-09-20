@@ -8,7 +8,7 @@ class Transaction < ActiveRecord::Base
   before_validation :set_classification
   before_validation :set_or_create_paypal_account
   validates_associated :paypal_account
-  after_create :upload_to_quickbooks
+  after_create :upload_to_quickbooks,  :if => Proc.new { |transaction| !transaction.product.blank? }
 
   validates :ipn_data, :presence => true
   validates :transaction_reference, :presence => true, :uniqueness => true
