@@ -6,7 +6,9 @@ class Qboe
   base_uri 'https://apps.quickbooks.com/j/AppGateway'
   format :xml
   headers 'Content-Type' => 'application/x-qbxml' 
-  QB_BATCH_NAME = "INDIVIDUAL PROFESSIONAL MEMBER"
+#  QB_BATCH_NAME = "INDIVIDUAL PROFESSIONAL MEMBER"
+  QB_BATCH_NAME = "Uncategorized"
+
   # APPLICATION_LOGIN = 'your application login'
   # CONNECTION_TICKET = 'your connection ticket'
   # APPLICATION_ID = 'your application id'
