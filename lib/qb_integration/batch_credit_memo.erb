@@ -21,9 +21,9 @@
 				<% receipt_lines.each do |receipt_line| %>
  				  <CreditMemoLineAdd>
    					<ItemRef>
-   						<FullName><%= receipt_line[:product] %></FullName>
+   						<FullName><%= receipt_line[:product].blank? ? "Unknown" : receipt_line[:product] %></FullName>
    					</ItemRef>
-   					<Desc><%= receipt_line[:count] %> <%= receipt_line[:product] %> refunds</Desc>
+   					<Desc><%= receipt_line[:count] %> <%= receipt_line[:product].blank? ? "Unknown" : receipt_line[:product] %> refunds</Desc>
    					<Amount><%= receipt_line[:amount] %></Amount>
    				</CreditMemoLineAdd>
  			  <%end%>
