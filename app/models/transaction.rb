@@ -65,6 +65,7 @@ class Transaction < ActiveRecord::Base
   
   def upload_to_quickbooks
     @product = Product.find_by_paypal_product_code(self.product)
+    return false if @product.nil?
     case self.classification
     when 'invoice'
       if self.paypal_account and self.paypal_account.devex_user and (!self.paypal_account.devex_user.qb_member_name.blank? or !@product.batch_qb_name.blank?)
