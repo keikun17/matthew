@@ -79,7 +79,7 @@ class Transaction < ActiveRecord::Base
     return false if @product.nil?
     case self.classification
     when 'invoice'
-      if self.paypal_account and (self.paypal_account.devex_user or (!@product.nil? and !@product.batch_qb_name.blank?)) and (!self.paypal_account.devex_user.qb_member_name.blank? or !@product.batch_qb_name.blank?)
+      if self.paypal_account and (self.paypal_account.devex_user or (!@product.nil? and !@product.batch_qb_name.blank?)) and ((!self.paypal_account.devex_user.nil? and !self.paypal_account.devex_user.qb_member_name.blank?) or !@product.batch_qb_name.blank?)
         items = [self.product]
         if !@product.nil? and !@product.batch_qb_name.blank?
           full_name = @product.batch_qb_name
@@ -91,7 +91,7 @@ class Transaction < ActiveRecord::Base
         end
       end
     when 'credit'
-      if self.paypal_account and (self.paypal_account.devex_user or (!@product.nil? and !@product.batch_qb_name.blank?)) and (!self.paypal_account.devex_user.qb_member_name.blank? or !@product.batch_qb_name.blank?)
+      if self.paypal_account and (self.paypal_account.devex_user or (!@product.nil? and !@product.batch_qb_name.blank?)) and ((!self.paypal_account.devex_user.nil? and !self.paypal_account.devex_user.qb_member_name.blank?) or !@product.batch_qb_name.blank?)
         amount = self.amount
         items = [self.product]
         if !@product.nil? and !@product.batch_qb_name.blank?
