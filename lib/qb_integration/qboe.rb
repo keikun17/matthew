@@ -52,7 +52,7 @@ class Qboe
   end
   
   def self.upload_batch_sales_receipt
-      batch_qb_member_name = QB_BATCH_NAME
+      # batch_qb_member_name = QB_BATCH_NAME
       # get receipt_lines
       # receipt_lines = Transaction.unscoped.find(:all, :select => "distinct product, count(product) as count", :conditions => {:classification => 'invoice', :for_next_bulk_update => true}, :group => "product").map{|x| {:count => x.count, :product => x.product }}
       batch_qb_names = Product.batch_names
