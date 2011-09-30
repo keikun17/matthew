@@ -49,7 +49,6 @@ class Transaction < ActiveRecord::Base
         :payer_id => payer_id,
         :first_name => ipn_data["first_name"],
         :last_name => ipn_data["last_name"])
-      end
       if pp_account.save
         map_paypal_account_to_devex_account(pp_account)
       end
