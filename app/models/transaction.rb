@@ -49,15 +49,21 @@ class Transaction < ActiveRecord::Base
         :payer_id => payer_id,
         :first_name => ipn_data["first_name"],
         :last_name => ipn_data["last_name"])
-      begin
-        eval "@evaluated_custom = #{a.custom}"
-        devex_user = User.find_by_username(@evaluated_custom[:devex_username])
-        pp_account.devex_user_id = devex_user.id unless devex_user.nil?
-      rescue Exception => exc
       end
-      pp_account.save        
+      if pp_account.save
+        map_paypal_account_to_devex_account(pp_account)
+      end
       self.paypal_account_id = self.paypal_account.id
     end 
+  end
+  
+  def map_paypal_account_to_devex_account(pp_account)
+    begin
+      eval "@evaluated_custom = #{self.custom}"
+      target_devex_user = User.find_by_username(@evaluated_custom[:devex_username])
+      pp_account.automap_devex_account(target_devex_user.username)
+    rescue Exception => exc
+    end
   end
   
   def self.upload_batch_sales_receipt
