@@ -68,7 +68,8 @@ class Qboe
         Rails.logger.info result
 
         #mark as uploaded
-        receipt_lines.each do |transaction|
+        transactions = Transaction.unscoped.find(:all, :conditions => {:product => paypal_product_codes, :classification => 'invoice', :for_next_bulk_update => true})
+        transactions.each do |transaction|
           transaction.update_attribute(:for_next_bulk_update, false)
           transaction.update_attribute(:uploaded_to_qb, true)
         end
