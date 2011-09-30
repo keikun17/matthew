@@ -53,22 +53,25 @@ class Qboe
   
   def self.upload_batch_sales_receipt
       batch_qb_member_name = QB_BATCH_NAME
-
       # get receipt_lines
-      receipt_lines = Transaction.unscoped.find(:all, :select => "distinct product, count(product) as count", :conditions => {:classification => 'invoice', :for_next_bulk_update => true}, :group => "product").map{|x| {:count => x.count, :product => x.product }}
-      today = Time.now.strftime("%Y-%m-%d")
-      session = self.getSession
+      # receipt_lines = Transaction.unscoped.find(:all, :select => "distinct product, count(product) as count", :conditions => {:classification => 'invoice', :for_next_bulk_update => true}, :group => "product").map{|x| {:count => x.count, :product => x.product }}
+      batch_qb_names = Product.batch_names
+      batch_qb_names.each do |batch_qb_name|
+        paypal_product_codes = Product.where(:batch_qb_name => batch_qb_name).map{|x| x.paypal_product_code}
+        receipt_lines = Transaction.unscoped.find(:all, :select => "distinct product, count(product) as count", :conditions => {:product => paypal_product_codes, :classification => 'invoice', :for_next_bulk_update => true}, :group => "product").map{|x| {:count => x.count, :product => x.product }}
+        today = Time.now.strftime("%Y-%m-%d")
+        session = self.getSession
+        xml_to_send = ERB.new(get_file_as_string("lib/qb_integration/batch_sales_receipt.erb")).result(binding) 
+        result = post('/', :body => xml_to_send )
+        puts "result : " + result.inspect
+        Rails.logger.info "UPLOAD BATCH SALES RECEIPT"
+        Rails.logger.info result
 
-      xml_to_send = ERB.new(get_file_as_string("lib/qb_integration/batch_sales_receipt.erb")).result(binding) 
-      result = post('/', :body => xml_to_send )
-      puts "result : " + result.inspect
-      Rails.logger.info "UPLOAD BATCH SALES RECEIPT"
-      Rails.logger.info result
-
-      #Mark as uploaded
-      Transaction.invoices.for_next_bulk_update.each do |transaction|
-        transaction.update_attribute(:for_next_bulk_update, false)
-        transaction.update_attribute(:uploaded_to_qb, true)
+        #mark as uploaded
+        receipt_lines.each do |transaction|
+          transaction.update_attribute(:for_next_bulk_update, false)
+          transaction.update_attribute(:uploaded_to_qb, true)
+        end
       end
   end
   

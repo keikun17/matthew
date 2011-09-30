@@ -44,7 +44,19 @@ class PaypalController < ApplicationController
     @transaction.payment_type = params[:payment_type]
   
     @transaction.custom = params[:custom] unless params[:custom].blank?
-    @transaction.product = params[:item_name]
+    
+    begin
+      eval "@evaluated_custom = #{@transaction.custom}"
+    rescue Exception => exc
+    
+    end
+    
+    if @evaluated_custom.is_a?(Hash)
+      @transaction.product = @evaluated_custom[:item_name]
+    else
+      @transaction.product = params[:item_name]     
+    end
+    
     if @transaction.save and notify.acknowledge
       
     else
