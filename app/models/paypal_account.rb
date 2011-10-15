@@ -1,7 +1,7 @@
 class PaypalAccount < ActiveRecord::Base
   has_many   :transactions
   belongs_to :devex_user
-  validates :first_name, :last_name,:email, :presence => true
+  validates :first_name, :email, :presence => true
 
   scope :orphans, :conditions => "devex_user_id is null"
 
