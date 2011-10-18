@@ -65,12 +65,12 @@ class Transaction < ActiveRecord::Base
     end
   end
   
-  def self.upload_batch_sales_receipt
-    Qboe.upload_batch_sales_receipt
+  def self.upload_batch_sales_receipt(transaction_ids)
+    Qboe.upload_batch_sales_receipt(transaction_ids)
   end
   
-  def self.upload_batch_credit_memo
-    Qboe.upload_batch_credit_memo
+  def self.upload_batch_credit_memo(transaction_ids)
+    Qboe.upload_batch_credit_memo(transaction_ids)
   end
 
   

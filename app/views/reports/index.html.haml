@@ -2,7 +2,7 @@
   %h3 Dashboard
 .notifications
   .notice
-    = transaction_count 
+    = Transaction.count 
     Transactions
     %br
     = orphan_paypal_accounts_count
@@ -11,11 +11,13 @@
     = uploadable_transactions_count
     have not yet been uploaded to quickbooks
     %br
-    = invoices_for_next_batch_update
-    Sales Receipt Transactions will be uploaded to quickbooks on next update
+    =# invoices_for_next_batch_update
+    = prepare_invoices_for_next_batch_update
+    Batch uploadable
     %br
-    = credit_memos_for_next_batch_update
-    Credit Memos Transactions will be uploaded to quickbooks on next update
+    =# credit_memos_for_next_batch_update
+    = prepare_credit_memos_for_next_batch_update    
+    Batch uploadable
     
 #content-options
   %fieldset
@@ -25,10 +27,8 @@
       = select_tag "list_of", options_for_select([["Sales Revenues", "invoice"], ["Credit Memos", "credit"]], params[:list_of])
       %br
       From
-      =# date_select "date_from", ""
       = calendar_date_select_tag "date_from", @date_from, :popup => "force"
       To
-      =# date_select "date_to", ""
       = calendar_date_select_tag "date_to", @date_to, :popup => "force"
       %br
       For the Product

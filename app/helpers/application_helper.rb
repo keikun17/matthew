@@ -27,8 +27,17 @@ module ApplicationHelper
     link_to(Transaction.invoices.for_next_bulk_update.count.to_s + " Sales Receipts", bulk_upload_sales_receipts_to_quickbooks_path(:classification => "invoice"), :class => "cool-link-red") 
   end
   
+  def prepare_invoices_for_next_batch_update
+    link_to(Transaction.invoices.for_next_bulk_update.count.to_s + " Sales Receipts", prepare_batch_upload_to_qb_transactions_path(:list_of => "invoice"), :class => "cool-link-red")
+  end
+  
   def credit_memos_for_next_batch_update
     link_to(Transaction.credits.for_next_bulk_update.count.to_s + " Credit Memos", bulk_upload_credit_memos_to_quickbooks_path(:classification => "credit"), :class => "cool-link-red") 
   end
+  
+  def prepare_credit_memos_for_next_batch_update
+    link_to(Transaction.credits.for_next_bulk_update.count.to_s + " Credit Memos", prepare_batch_upload_to_qb_transactions_path(:list_of => "credit"), :class => "cool-link-red")
+  end
+  
   
 end

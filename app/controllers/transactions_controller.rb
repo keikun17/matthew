@@ -89,6 +89,18 @@ class TransactionsController < ApplicationController
     end
   end
   
+  def prepare_batch_upload_to_qb
+    @transactions = Transaction.for_next_bulk_update
+    case params[:list_of]
+    when 'invoice'
+      @transactions = @transactions.invoices
+      @form_path = bulk_upload_sales_receipts_to_quickbooks_path
+    when 'credit'
+      @transactions = @transactions.credits
+      @form_path = bulk_upload_credit_memos_to_quickbooks_path
+    end
+  end
+  
   def upload_to_qb
     @transaction = Transaction.find(params[:id])
     @transaction.upload_to_quickbooks
@@ -105,17 +117,17 @@ class TransactionsController < ApplicationController
   end
   
   def bulk_upload_sales_receipts_to_quickbooks
-    count = Transaction.invoices.for_next_bulk_update.count
-    Transaction.upload_batch_sales_receipt
+    count = Transaction.invoices.for_next_bulk_update.where(:id => params[:for_upload][:ids]).count
+    Transaction.upload_batch_sales_receipt(params[:for_upload][:ids])
     flash[:notice] = "#{count} Transactions have been uploaded by bulk"
-    redirect_to request.referer
+    redirect_to reports_path
   end
   
   def bulk_upload_credit_memos_to_quickbooks
-    count = Transaction.credits.for_next_bulk_update.count
-    Transaction.upload_batch_credit_memo
+    count = Transaction.credits.for_next_bulk_update.where(:id => params[:for_upload][:ids]).count
+    Transaction.upload_batch_credit_memo(params[:for_upload][:ids])
     flash[:notice] = "#{count} Transactions have been uploaded by bulk"
-    redirect_to request.referer
+    redirect_to reports_path
   end  
   
 end

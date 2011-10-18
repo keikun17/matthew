@@ -51,14 +51,14 @@ class Qboe
       Rails.logger.info result
   end
   
-  def self.upload_batch_sales_receipt
+  def self.upload_batch_sales_receipt(transaction_ids)
       # batch_qb_member_name = QB_BATCH_NAME
       # get receipt_lines
       # receipt_lines = Transaction.unscoped.find(:all, :select => "distinct product, count(product) as count", :conditions => {:classification => 'invoice', :for_next_bulk_update => true}, :group => "product").map{|x| {:count => x.count, :product => x.product }}
       batch_qb_names = Product.batch_names
       batch_qb_names.each do |batch_qb_name|
         paypal_product_codes = Product.where(:batch_qb_name => batch_qb_name).map{|x| x.paypal_product_code}
-        receipt_lines = Transaction.unscoped.find(:all, :select => "distinct product, count(product) as count", :conditions => {:product => paypal_product_codes, :classification => 'invoice', :for_next_bulk_update => true}, :group => "product").map{|x| {:count => x.count, :product => x.product }}
+        receipt_lines = Transaction.unscoped.find(:all, :select => "distinct product, count(product) as count", :conditions => {:id => transaction_ids, :product => paypal_product_codes, :classification => 'invoice', :for_next_bulk_update => true}, :group => "product").map{|x| {:count => x.count, :product => x.product }}
         today = Time.now.strftime("%Y-%m-%d")
         session = self.getSession
         xml_to_send = ERB.new(get_file_as_string("lib/qb_integration/batch_sales_receipt.erb")).result(binding) 
@@ -68,7 +68,7 @@ class Qboe
         Rails.logger.info result
 
         #mark as uploaded
-        transactions = Transaction.unscoped.find(:all, :conditions => {:product => paypal_product_codes, :classification => 'invoice', :for_next_bulk_update => true})
+        transactions = Transaction.unscoped.find(:all, :conditions => {:id => transaction_ids, :product => paypal_product_codes, :classification => 'invoice', :for_next_bulk_update => true})
         transactions.each do |transaction|
           transaction.update_attribute(:for_next_bulk_update, false)
           transaction.update_attribute(:uploaded_to_qb, true)
@@ -77,15 +77,15 @@ class Qboe
   end
   
   # TODO
-  def self.upload_batch_credit_memo
+  def self.upload_batch_credit_memo(transaction_ids=[])
     batch_qb_member_name = QB_BATCH_NAME
 
     # get receipt_lines
-    receipt_lines = Transaction.unscoped.find(:all, :select => "distinct product, count(product) as count", :conditions => {:classification => 'credit', :for_next_bulk_update => true}, :group => "product").map{|x| {
+    receipt_lines = Transaction.unscoped.find(:all, :select => "distinct product, count(product) as count", :conditions => {:id => transaction_ids, :classification => 'credit', :for_next_bulk_update => true}, :group => "product").map{|x| {
       :count => x.count,
       :product => x.product,
-      :amount => sprintf("%.2f", Transaction.credits.for_next_bulk_update.sum(:amount, :conditions => {:product => x.product}).abs)
-      }}
+      :amount => sprintf("%.2f", Transaction.credits.for_next_bulk_update.sum(:amount, :conditions => {:id => transaction_ids, :product => x.product}).abs)
+      }}      
     today = Time.now.strftime("%Y-%m-%d")
     session = self.getSession
 
@@ -97,7 +97,7 @@ class Qboe
     
     #Mark as uploaded
     unless (result["QBXML"] and result["QBXML"]["QBXMLMsgsRs"] and result["QBXML"]["QBXMLMsgsRs"]["CreditMemoAddRs"] and result["QBXML"]["QBXMLMsgsRs"]["CreditMemoAddRs"]["statusSeverity"].eql?("Error"))
-      Transaction.credits.for_next_bulk_update.each do |transaction|
+      Transaction.credits.where(:id => transaction_ids).for_next_bulk_update.each do |transaction|
         transaction.update_attribute(:for_next_bulk_update, false)
         transaction.update_attribute(:uploaded_to_qb, true)
       end

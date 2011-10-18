@@ -22,6 +22,9 @@ Matthew::Application.routes.draw do
     member do 
       get 'upload_to_qb'
     end
+    collection do 
+      get 'prepare_batch_upload_to_qb'
+    end
   end
   match '/ipn' => 'paypal#ipn'
   match '/mappings/do_map' => 'mappings#do_map'
