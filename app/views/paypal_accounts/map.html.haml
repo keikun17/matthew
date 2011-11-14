@@ -13,7 +13,6 @@
 
   #content-search
     = text_field_tag "query", "Search...", :size => 30, :onclick => "this.value=''"
-    Company
     = observe_field('query', :frequency => 2, :update => "search_results", :with => 'query' , :url => {:controller => 'users', :action => "find_users", :paypal_account_id => params[:id]})
 
 %hr
